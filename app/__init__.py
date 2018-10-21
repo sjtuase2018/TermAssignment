@@ -27,3 +27,4 @@ if not app.debug:
     app.logger.info('server startup')
 
 from app import url_mapping, entity_mapping
+from app import video_stream
