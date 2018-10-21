@@ -1,0 +1,8 @@
+包名：摄像头驱动
+本包实现生产环境中摄像头的模拟
+在videoFeeds路径下以video+Cam_Id.mpg为格式作为该摄像头的信号模拟
+
+使用方法：
+安装opencv
+在init.py中引入video_stream.py包(会自动引入本包)
+在需要引入实时摄像头信号的地方插入img标签，并将src属性写成‘/video_feed/Cam_Id’
