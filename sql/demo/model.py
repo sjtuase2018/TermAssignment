@@ -16,9 +16,9 @@ area_rules = db.Table('area_rules',
     db.Column('rule_id', db.Integer, db.ForeignKey('rule.id'))
 )
 
-rule_vlogs = db.Table('rule_vlogs',
-    db.Column('rule_id', db.Integer, db.ForeignKey('rule.id')),
-    db.Column('vlog_id', db.Integer, db.ForeignKey('vlog.id'))
+vlog_rules = db.Table('rule_vlogs',
+    db.Column('vlog_id', db.Integer, db.ForeignKey('vlog.id')),
+    db.Column('rule_id', db.Integer, db.ForeignKey('rule.id'))
 )
 
 
@@ -27,8 +27,7 @@ class Area(db.Model):
     description = db.Column(db.String(255))
     videoes = db.relationship('Video', backref='area', lazy='dynamic')
     vlogs = db.relationship('Vlog', backref='area', lazy='dynamic')
-    area_rules = db.relationship('Area_rule', secondary=area_rules,
-        backref=db.backref('area', lazy='dynamic'))
+    rules = db.relationship('Rule', secondary=area_rules)
 
 
 class Video(db.Model):
@@ -41,8 +40,6 @@ class Video(db.Model):
 class Rule(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(255))
-    area_rules = db.relationship('Rule_vlog', secondary=rule_vlogs,
-        backref=db.backref('rule', lazy='dynamic'))
 
 
 class Vlog(db.Model):
@@ -51,6 +48,7 @@ class Vlog(db.Model):
     pic_path = db.Column(db.String(255))
     area_id = db.Column(db.Integer, db.ForeignKey('area.id'))
     video_id = db.Column(db.Integer, db.ForeignKey('video.id'))
+    rules = db.relationship('Rule', secondary=vlog_rules)
 
 
 class Admin(db.Model):
@@ -61,6 +59,5 @@ class Admin(db.Model):
     loginip = db.Column(db.Integer)
 
 
-db.create_all()
 
 
