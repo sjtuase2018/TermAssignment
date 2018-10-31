@@ -1,0 +1,120 @@
+2018-10-29 15:01:17,490 INFO: server startup [in G:\TermAssignment\app\__init__.py:31]
+2018-10-29 15:01:20,138 ERROR: Exception on / [GET] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
+Traceback (most recent call last):
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "g:\programs\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "G:\TermAssignment\app\url_mapping.py", line 16, in catch_all
+    return render_template("index.html")
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\templating.py", line 134, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 869, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 830, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 804, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\templating.py", line 58, in get_source
+    return self._get_source_fast(environment, template)
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\templating.py", line 86, in _get_source_fast
+    raise TemplateNotFound(template)
+TemplateNotFound: index.html
+2018-10-29 15:02:16,921 INFO: server startup [in G:\TermAssignment\app\__init__.py:31]
+2018-10-29 15:05:23,213 INFO: server startup [in G:\TermAssignment\app\__init__.py:31]
+2018-10-29 15:06:53,026 INFO: server startup [in G:\TermAssignment\app\__init__.py:31]
+2018-10-29 15:07:17,523 INFO: server startup [in G:\TermAssignment\app\__init__.py:31]
+2018-10-29 15:10:51,496 INFO: server startup [in G:\TermAssignment\app\__init__.py:31]
+2018-10-29 15:11:18,980 INFO: server startup [in G:\TermAssignment\app\__init__.py:31]
+2018-10-29 15:22:35,795 INFO: server startup [in G:\TermAssignment\app\__init__.py:31]
+2018-10-29 15:24:27,053 INFO: server startup [in G:\TermAssignment\app\__init__.py:39]
+2018-10-29 15:30:31,372 INFO: server startup [in G:\TermAssignment\app\__init__.py:40]
+2018-10-29 15:30:34,538 ERROR: Exception on / [GET] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
+Traceback (most recent call last):
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "g:\programs\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "G:\TermAssignment\app\__init__.py", line 23, in catch_all
+    return render_template("index.html")
+NameError: global name 'render_template' is not defined
+2018-10-29 15:30:39,207 ERROR: Exception on / [GET] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
+Traceback (most recent call last):
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "g:\programs\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "G:\TermAssignment\app\__init__.py", line 23, in catch_all
+    return render_template("index.html")
+NameError: global name 'render_template' is not defined
+2018-10-29 15:30:39,607 ERROR: Exception on / [GET] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
+Traceback (most recent call last):
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "g:\programs\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "G:\TermAssignment\app\__init__.py", line 23, in catch_all
+    return render_template("index.html")
+NameError: global name 'render_template' is not defined
+2018-10-29 15:31:15,542 INFO: server startup [in G:\TermAssignment\app\__init__.py:40]
+2018-10-29 15:36:07,707 INFO: server startup [in G:\TermAssignment\app\__init__.py:40]
+2018-10-29 15:38:20,523 INFO: server startup [in G:\TermAssignment\app\__init__.py:40]
+2018-10-29 15:47:04,332 INFO: server startup [in G:\TermAssignment\app\__init__.py:40]
+2018-10-29 15:47:33,678 INFO: server startup [in G:\TermAssignment\app\__init__.py:40]
+2018-10-29 15:47:50,903 INFO: server startup [in G:\TermAssignment\app\__init__.py:40]
+2018-10-29 15:48:29,867 INFO: server startup [in app\__init__.py:40]
+2018-10-29 17:07:30,581 INFO: server startup [in app\__init__.py:40]
+2018-10-29 21:07:31,142 INFO: server startup [in app\__init__.py:45]
+2018-10-29 21:10:26,737 INFO: server startup [in app\__init__.py:45]
+2018-10-29 21:25:16,176 INFO: server startup [in app\__init__.py:45]
+2018-10-29 21:26:51,509 INFO: server startup [in app\__init__.py:45]
+2018-10-29 21:44:25,707 INFO: server startup [in app\__init__.py:45]
+2018-10-29 21:45:37,141 INFO: server startup [in app\__init__.py:45]
+2018-10-29 21:45:37,141 INFO: server startup [in app\__init__.py:45]
+2018-10-29 21:54:17,822 INFO: server startup [in app\__init__.py:45]
+2018-10-29 21:54:17,861 INFO: server startup [in app\__init__.py:45]
+2018-10-29 21:54:17,861 INFO: server startup [in app\__init__.py:45]
+2018-10-29 21:54:39,226 INFO: server startup [in app\__init__.py:45]
+2018-10-29 21:54:39,226 INFO: server startup [in app\__init__.py:45]
+2018-10-29 21:54:39,226 INFO: server startup [in app\__init__.py:45]
+2018-10-29 21:55:23,424 INFO: server startup [in app\__init__.py:45]
+2018-10-29 21:55:23,424 INFO: server startup [in app\__init__.py:45]
+2018-10-29 21:55:23,424 INFO: server startup [in app\__init__.py:45]
+2018-10-29 21:55:23,424 INFO: server startup [in app\__init__.py:45]
+2018-10-29 21:56:09,058 INFO: server startup [in app\__init__.py:45]
+2018-10-29 23:00:24,246 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-10-29 23:30:29,005 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]

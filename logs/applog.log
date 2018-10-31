@@ -1,0 +1,43 @@
+2018-10-31 11:14:04,052 ERROR: Exception on /api/getCamera/ [GET] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
+Traceback (most recent call last):
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "g:\programs\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "G:\TermAssignment\app\url_mapping.py", line 40, in getCamera
+    return jsonify(objects = temp)
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\json\__init__.py", line 321, in jsonify
+    dumps(data, indent=indent, separators=separators) + '\n',
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\json\__init__.py", line 179, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File "c:\python27\Lib\json\__init__.py", line 251, in dumps
+    sort_keys=sort_keys, **kw).encode(obj)
+  File "c:\python27\Lib\json\encoder.py", line 209, in encode
+    chunks = list(chunks)
+  File "c:\python27\Lib\json\encoder.py", line 434, in _iterencode
+    for chunk in _iterencode_dict(o, _current_indent_level):
+  File "c:\python27\Lib\json\encoder.py", line 408, in _iterencode_dict
+    for chunk in chunks:
+  File "c:\python27\Lib\json\encoder.py", line 332, in _iterencode_list
+    for chunk in chunks:
+  File "c:\python27\Lib\json\encoder.py", line 408, in _iterencode_dict
+    for chunk in chunks:
+  File "c:\python27\Lib\json\encoder.py", line 332, in _iterencode_list
+    for chunk in chunks:
+  File "c:\python27\Lib\json\encoder.py", line 442, in _iterencode
+    o = _default(o)
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\json\__init__.py", line 81, in default
+    return _json.JSONEncoder.default(self, o)
+  File "c:\python27\Lib\json\encoder.py", line 184, in default
+    raise TypeError(repr(o) + " is not JSON serializable")
+TypeError: <Rule 1> is not JSON serializable
+2018-10-31 11:18:09,368 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-10-31 13:20:48,269 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
