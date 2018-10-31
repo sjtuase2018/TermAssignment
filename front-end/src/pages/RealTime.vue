@@ -1,24 +1,39 @@
 <template>
   <v-container>
     <div class="player">
-      <img src="">
+      <!-- <v-btn @click="getImg()"/> -->
+      <img style="-webkit-user-select: none;" src="http://localhost:5000/api/video_feed/?camid=1" width="1037" height="583">
     </div>
   </v-container>
 </template>
 
 <script>
-  // custom skin css
-  // require styles
-import 'video.js/dist/video-js.css'
+  import axios from 'axios'
+  export default {
+    components: {
 
-export default {
-  components: {
-    
-  },
-  data() {
-    return {
+    },
+    data() {
+      return {
+        imgUrl: '',
+        id: 1
+      }
+    },
+    created() {
+      this.getImg();
+    },
+    methods: {
+      
+      getImg() {
+        const config = { headers: { 'Content-Type': 'multipart/x-mixed-replace; boundary=frame' } };
+        console.log('getimg ')
+        const path = `http://localhost:5000/api/video_feed/?camid=1`;
+        axios.get(path, config).then(response => {
+          console.log(response)
+        })
+      }
     }
-  }
-    
+  
+
   }
 </script>

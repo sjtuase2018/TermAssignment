@@ -1,100 +1,93 @@
-from app import app, db
-from flask_login import login_required, current_user, login_user, logout_user
-from flask import render_template, redirect, url_for, flash, request
-from flask_wtf import FlaskForm
-from wtforms import SubmitField, StringField, PasswordField, BooleanField, TextAreaField
-from wtforms.validators import DataRequired, ValidationError, EqualTo
-from werkzeug.urls import url_parse
-from app.entity_mapping import User
+# -*- coding: UTF-8 -*-
+from app import db
+# from flask_login import login_required, current_user, login_user, logout_user
+from flask import render_template, redirect, url_for, flash, request, Blueprint, jsonify
+# from flask_wtf import FlaskForm
+# from wtforms import SubmitField, StringField, PasswordField, BooleanField, TextAreaField
+# from wtforms.validators import DataRequired, ValidationError, EqualTo
+# from werkzeug.urls import url_parse
+# from app.entity_mapping import User
+# from models import db, User
+from entity_mapping import *
+import json
 
+api = Blueprint('api', __name__)
 
-@app.route('/')
-@app.route('/index')
-@login_required
-def index():
-    return render_template('index.html', title='HomePage')
-
-
-@app.route('/login', methods=['GET', 'POST'])
+@api.route('/login/', methods=('POST',))
 def login():
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
-
-    class LoginForm(FlaskForm):
-        username = StringField('UserName', validators=[DataRequired()])
-        password = PasswordField('Password', validators=[DataRequired()])
-        remember_me = BooleanField('remember_me', default=False)
-        submit = SubmitField('Sign In')
-
-    form = LoginForm()
-
-    if form.validate_on_submit():
-        u = User.query.filter_by(username=form.username.data).first()
-        if u is None or not u.check_password(form.password.data):
-            flash('Invalid username or password')
-            return redirect(url_for('index'))
-        login_user(u, remember=form.remember_me.data)
-        next_page = request.args.get('next')
-        if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('index')
-        return redirect(next_page)
-    return render_template('login.html', title='Sign In', form=form, can_reg=True)
-
-
-@app.route('/logout')  
-def logout():
-    logout_user()
-    return redirect(url_for('index'))
-
-@app.route('/realTime')
-def realTime():
-    return render_template('realTime.html')
-
-@app.route('/charts')
-def charts():
-    return render_template('charts.html')
-
-@app.route('/logs')
-def logs():
-    return render_template('logs.html')
-
-@app.route('/settings')
-def settings():
-    return render_template('settings.html')
-
-
-@app.route('/user/<username>')
-@login_required
-def userprofile(username):
-    u = User.query.filter_by(username=username).first_or_404()
-    # first_or_404() implement by flask_sqlalchemy, raising 404 automatically instead of returning none
-    return render_template('user.html', user=u, title='UserProfile')
-
-
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
-
-    class RegForm(FlaskForm):
-        username = StringField('Username', validators=[DataRequired()])
-        password = PasswordField('Password', validators=[DataRequired()])
-        password2 = PasswordField(
-            'Repeat Password', validators=[DataRequired(), EqualTo('password')])
-        submit = SubmitField('Register')
-
-        def validate_username(self, username):
-            u = User.query.filter_by(username=username.data).first()
-            if u is not None:
-                raise ValidationError('Please use a different username.')
-
-    form = RegForm()
-    if form.validate_on_submit():
-        user = User(username=form.username.data)
-        user.set_password(form.password.data)
-        db.session.add(user)
+    # print(request)
+    # # print(data['username']) wrong
+    # print(data)
+    # username = request.get_json('username')
+    # password = request.json.get('password')
+    # if username and password:
+    #     print('ok')
+    a = request.json['username']
+    b = request.json['password']
+    if Admin.query.filter_by(user_name = a).first() == None:
+        u = Admin(user_name=a, password=b)
+        db.session.add(u)
         db.session.commit()
-        flash('Congratulations, you are now a registered user!')
-        return redirect(url_for('login'))
-    return render_template('register.html', title='Register', form=form)
+    return jsonify({'code': 200, 'hello': '11'})
 
+@api.route('/getCamera/', methods=('GET',))
+def getCamera():
+    res = Area.query.all()
+    cam = Video.query.filter_by(id=1).first()
+    # temp = []
+    # for x in res:
+    #     temp.append(x.to_json())
+    # return jsonify(objects = temp)
+    return jsonify({
+            'id': '01',
+            'area': '101',
+            'hazardCategory': 'A'
+        },
+        {
+            'id': '02',
+            'area': '102',
+            'hazardCategory': 'B',
+        })
+
+@api.route('/getLogs/', methods=('GET','POST'))
+def getLogs():
+    data = request.get_json()
+    print(data)
+    return jsonify({
+            'time': '2018.10.21/19:11:14',
+            'area': 101,
+            'hazardCategory': 'A'
+          },
+          {
+            'time': '2018.10.21/19:11:14',
+            'area': 101,
+            'hazardCategory': 'A'
+          },
+        )
+
+@api.route('/getChart/', methods=('GET',))
+def getChart():
+    
+    return jsonify(
+        {
+            'dataWeek': [820, 932, 901, 934, 1290, 1330, 1320],
+            'dataM1': [6, 9, 10, 15, 25, 76, 135, 162, 32, 20, 6, 3],
+            'dataM2': [2, 5, 9, 26, 28, 70, 175, 182, 48, 18, 6, 2],
+            'dataM3': [1, 2, 3, 4, 5, 6, 7, 8, 9, 6, 4, 2],
+            'name': ['地区1', '地区2', '地区3'],
+            'value': [10, 10, 10]
+        }
+        )
+
+@api.route('/settingEdit/', methods=('POST',))
+def settingEdit():
+    data = request.get_json()
+    print(data)
+    return jsonify({'code': 200, 'hello': '11'})
+
+    
+@api.route('/settingDelete/', methods=('DELETE',))
+def settingDelete():
+    data = request.get_json()
+    print(data)
+    return jsonify({'code': 200, 'hello': '11'})

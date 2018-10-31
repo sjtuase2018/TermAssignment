@@ -3,13 +3,13 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:123456@localhost:3306/course?charset=utf8mb4'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:123@localhost:3306/course'
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 
 db = SQLAlchemy(app)
-
+print('+1s')
 
 area_rules = db.Table('area_rules',
     db.Column('area_id', db.Integer, db.ForeignKey('area.id')),
@@ -58,6 +58,8 @@ class Admin(db.Model):
     logintime = db.Column(db.DateTime)
     loginip = db.Column(db.Integer)
 
+print('+1s')
+db.create_all()
 
 
 
