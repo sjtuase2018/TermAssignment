@@ -1,0 +1,46 @@
+<html>
+
+<head>
+    {% if title %}
+    <title>{{title}}</title>
+    {% else %}
+    <title>default title</title>
+    {% endif %}
+    <link href="/static/css/logs.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="{{ url_for('static', filename='css/logs.css') }}"> -->
+</head>
+
+<body>
+    <div class="header">header</div>
+    <div class="slide">
+        <li><a href="realTime">RealTime</a></li>
+        <li><a href="charts">Charts</a></li>
+        <li><a href="logs">Logs</a></li>
+        <li><a href="settings">Setting</a></li>
+        <li><a href="user">Profile</a></li>
+    </div>
+    <div class="container">
+        <!-- Table goes in the document BODY -->
+        <table class="gridtable">
+            <tr>
+                <th>Info Header 1</th>
+                <th>Info Header 2</th>
+                <th>Info Header 3</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Text 2A</td>
+                <td>Text 2B</td>
+                <td>Text 2C</td>
+            </tr>
+        </table>
+    </div>
+    <div class="footer">hehehe</div>
+
+</body>
+
+</html>

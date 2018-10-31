@@ -41,10 +41,26 @@ def login():
     return render_template('login.html', title='Sign In', form=form, can_reg=True)
 
 
-@app.route('/logout')
+@app.route('/logout')  
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+@app.route('/realTime')
+def realTime():
+    return render_template('realTime.html')
+
+@app.route('/charts')
+def charts():
+    return render_template('charts.html')
+
+@app.route('/logs')
+def logs():
+    return render_template('logs.html')
+
+@app.route('/settings')
+def settings():
+    return render_template('settings.html')
 
 
 @app.route('/user/<username>')
