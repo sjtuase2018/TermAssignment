@@ -50,7 +50,7 @@ if not app.debug:
 # from app import url_mapping, entity_mapping
 # from app import video_stream
 # from app.url_mapping import api
-from entity_mapping import *
-from url_mapping import *
+from app.entity_mapping import *
+from app.url_mapping import *
 # from video_stream import *
 app.register_blueprint(api, url_prefix="/api")
