@@ -41,3 +41,6 @@ Traceback (most recent call last):
 TypeError: <Rule 1> is not JSON serializable
 2018-10-31 11:18:09,368 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
 2018-10-31 13:20:48,269 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-10-31 14:20:13,632 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-10-31 14:21:58,884 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-10-31 14:35:36,023 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
