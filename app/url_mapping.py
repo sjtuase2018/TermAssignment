@@ -89,7 +89,7 @@ def settingSave():
         return jsonify({'code': 400})
 
 
-@api.route('/settingNew/', methods='POST')
+@api.route('/settingNew/', methods=('POST',))
 def settingNew():
     data = request.get_json()
     areaName = data['area']
