@@ -1,4 +1,4 @@
-# from entity_mapping import *
+from app.entity_mapping import *
 
 
 def ExitUser(username):
@@ -11,7 +11,8 @@ def VarifyUser(username, password):
 
 def LogQuery(sortby, size, startwith):
     print sortby, size, startwith
-    return {}
+        return [{'time': '232323', 'area': '23233', 'rules': '22222', 'imgUrl': '232323'}]
+
 
 
 def GetWeekDayLogNum(startdate, enddate):
