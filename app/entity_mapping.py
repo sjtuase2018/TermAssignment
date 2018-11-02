@@ -51,12 +51,6 @@ class Area(db.Model):
     def __init__(self, description):
         self.description = description
 
-    def to_json(self):
-        return {
-            'id': self.id,
-            'description': self.description
-        }
-
 
 class Video(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -75,34 +69,34 @@ class Rule(db.Model):
     def __init__(self, description):
         self.description = description
 
-    def to_json(self):
-        return {
-            'id': self.id,
-            'description': self.description
-        }
-
 
 class Vlog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.DateTime, default=datetime.now)
     pic_path = db.Column(db.String(255))
     area_id = db.Column(db.Integer, db.ForeignKey('area.id'))
     video_id = db.Column(db.Integer, db.ForeignKey('video.id'))
-    date = db.Column(db.DateTime, default=datetime.now)
     rules = db.relationship('Rule', secondary=vlog_rules)
 
-    def __init__(self, pic_path, area_id, video_id):
+    def __init__(self, pic_path, area_id, video_id, date = datetime.now):
         self.pic_path = pic_path
         self.area_id = area_id
         self.video_id = video_id  
-
+        self.date = date
 
 
 class Admin(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_name = db.Column(db.String(20))
-    password = db.Column(db.String(20))
+    user_name = db.Column(db.String(64), index=True, unique=True)
+    password = db.Column(db.String(128))
     logintime = db.Column(db.DateTime)
     loginip = db.Column(db.Integer)
+
+    def set_password(self, password):
+        self.password = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
 
     def __init__(self, user_name, password=None, logintime=None, loginip=None):
         self.user_name = user_name 

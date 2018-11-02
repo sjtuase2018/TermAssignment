@@ -37,6 +37,18 @@ export default new Router({
       }
     },
     {
+      path: '/register',
+      meta: {
+        public: true,
+      },
+      name: 'Register',
+      component: () => import(
+        /* webpackChunkName: "routes" */
+        /* webpackMode: "lazy-once" */
+        `@/pages/Register.vue`
+      )
+    },
+    {
       path: '/login',
       meta: {
         public: true,

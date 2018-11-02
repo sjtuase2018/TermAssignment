@@ -23,6 +23,8 @@
     data() {
       return {
         msg: 'Welcome to Your Vue.js App',
+        startTime: '2017-10-1',
+        endTime: '2018-11-1',
         dataWeek: [],
         dataMoon: {
           dataM1: [],
@@ -30,39 +32,36 @@
           dataM3: [],
         },
         dataArea: {
-          legendData: ['地区1', '地区2', '地区3'],
-          //selected: [{name: '地区1', value: 10},{name: '地区2', value: 10},{name: '地区3', value: 10},],
-          seriesData: [{
-            name: '地区1',
-            value: 10
-          }, {
-            name: '地区2',
-            value: 10
-          }, {
-            name: '地区3',
-            value: 10
-          }, ]
+          legendData: [],
+          // legendData: ['地区1', '地区2', '地区3'],
+          // selected: [{name: '地区1', value: 10},{name: '地区2', value: 10},{name: '地区3', value: 10},],
+          seriesData: []
+          // {
+          //   name: '地区1',
+          //   value: 10
+          // }, {
+          //   name: '地区2',
+          //   value: 10
+          // }, {
+          //   name: '地区3',
+          //   value: 10
+          // }
         }
       }
     },
     mounted() {
-      console.log(this.dataWeek)
+      // console.log(this.dataWeek)
       const path = `http://localhost:5000/api/getChart/`;
-      axios.get(path).then(response => {
+      axios.post(path, {
+        startTime: this.startTime,
+        endTime: this.endTime
+      }).then(response => {
           this.dataWeek = response.data.dataWeek,
-          this.dataMoon.dataM1 =response.data.dataM1,
-          this.dataMoon.dataM2 =response.data.dataM2,
-          this.dataMoon.dataM3 =response.data.dataM3,
-          this.dataArea.legendData=response.data.name;
-          // var Rname = response.data.value;
-          // var Rvalue = response.data.value;
-          // console.log(Rvalue)
-          // console.log(Rvalue.length)
-          // var i = 0;
-          // while(i < Rvalue.length){
-          //   var obj = Object.assign(Rname[i], Rvalue[i]);
-          //   this.dataArea.seriesData.push(obj);
-          // }
+          this.dataMoon.dataM1 = response.data.dataM1,
+          this.dataMoon.dataM2 = response.data.dataM2,
+          this.dataMoon.dataM3 = response.data.dataM3,
+          this.dataArea.legendData = response.data.name;
+          this.dataArea.seriesData = response.data.seriesData;
          
           this.drawLine();
         })

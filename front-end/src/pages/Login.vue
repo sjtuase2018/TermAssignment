@@ -17,7 +17,10 @@
                   </v-form>
                 </v-card-text>
                 <v-card-actions>
+                  <!-- <v-btn color="primary" @click="register" :loading="loading">Regi</v-btn> -->
+                  <router-link to='/register'><p>&nbsp;&nbsp;go to register?</p></router-link>
                   <v-spacer></v-spacer>
+                  
                   <v-btn color="primary" @click="login" :loading="loading">Login</v-btn>
                 </v-card-actions>
               </v-card>

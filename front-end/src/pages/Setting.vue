@@ -6,7 +6,7 @@
         <v-divider class="mx-2" inset vertical></v-divider>
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="500px">
-          <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn>
+          <v-btn slot="activator" color="primary" dark class="mb-2" @click="setNew">New Item</v-btn>
           <v-card>
             <v-card-title>
               <span class="headline">{{ formTitle }}</span>
@@ -16,13 +16,10 @@
               <v-container grid-list-md>
                 <v-layout wrap>
                   <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.id" label="Id (序号）"></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm6 md4>
                     <v-text-field v-model="editedItem.area" label="Area （地区）"></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.dangerLevel" label="DangerLevel （危险类别）"></v-text-field>
+                    <v-text-field v-model="editedItem.rules" label="Rules （危险类别）"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-container>
@@ -31,17 +28,16 @@
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-              <v-btn color="blue darken-1" flat @click.native="save">Save</v-btn>
+              <v-btn color="blue darken-1" flat @click.native="save(editedItem)">Save</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
       </v-toolbar>
-      <v-data-table :headers="headers" :items="desserts" hide-actions class="elevation-1">
+      <v-data-table :headers="headers" :items="desserts" v-model="desserts" hide-actions class="elevation-1">
         <template slot="items" slot-scope="props">
-          <td class="text-xs-center">{{ props.item.id }}</td>
           <td class="text-xs-center">{{ props.item.area }}</td>
-          <td class="text-xs-center">{{ props.item.hazardCategory }}
-
+          <td class="text-xs-center">
+            <div v-for="(item,index) in props.item.rules" :key="index">{{item}}</div>
           </td>
           <td class="justify-center layout px-0">
             <v-icon small class="mr-2" @click="editItem(props.item)">
@@ -51,9 +47,6 @@
               delete
             </v-icon>
           </td>
-        </template>
-        <template slot="no-data">
-          <v-btn color="primary" @click="initialize">Reset</v-btn>
         </template>
       </v-data-table>
     </v-container>
@@ -65,12 +58,8 @@
   export default {
     data: () => ({
       dialog: false,
-      headers: [{
-          text: 'ID (序号）',
-          align: 'center',
-          sortable: false,
-          value: 'id'
-        },
+      new: false,
+      headers: [
         {
           text: 'Area (地区）',
           align: 'center',
@@ -78,10 +67,10 @@
           value: 'area'
         },
         {
-          text: 'HazardCategory (危险类别）',
+          text: 'Rules (危险类别）',
           align: 'center',
           sortable: false,
-          value: 'hazardCategory'
+          value: 'rules'
         },
         {
           text: 'Actions',
@@ -95,12 +84,12 @@
       editedItem: {
         id: '',
         area: 0,
-        hazardCategory: 0,
+        rules: ['无人区','安全帽','工作服'],
       },
       defaultItem: {
         id: '',
         area: 0,
-        hazardCategory: 0,
+        rules: ['无人区','安全帽','工作服'],
       }
     }),
 
@@ -116,55 +105,61 @@
       }
     },
     mounted() {
-        const path = `http://localhost:5000/api/getCamera/`;
-        axios.get(path,{
-
-        }).then(response => {
-            console.log(response.data)
-            this.desserts = response.data
-          })
-          .catch(error => {
-            console.log(error)
-          })
+      this.getCamera();
     },
     created() {
 
     },
 
     methods: {
-      editItem(item) {
-        this.editedIndex = this.desserts.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialog = true
+      getCamera() {
+        const path = `http://localhost:5000/api/getCamera/`;
+        axios.get(path, {
 
-        //发送修改请求
-        const path = `http://localhost:5000/api/settingEdit/`;
-        axios.post(path, {
-          item
-        }).then(response => {
-            console.log(response.data),
+          }).then(response => {
+            console.log(response.data)
             this.desserts = response.data
+            console.log(this.desserts)
           })
           .catch(error => {
             console.log(error)
           })
       },
+      editItem(item) {
+        this.editedIndex = this.desserts.indexOf(item)
+        this.editedItem = Object.assign({}, item)
+        this.dialog = true
+
+        // //发送修改请求
+        // const path = `http://localhost:5000/api/settingEdit/`;
+        // axios.post(path, {
+        //   item
+        // }).then(response => {
+        //     console.log(response.data),
+        //     this.desserts = response.data
+        //   })
+        //   .catch(error => {
+        //     console.log(error)
+        //   })
+      },
 
       deleteItem(item) {
-        const id = this.desserts.indexOf(item)
-        var r = confirm('Are you sure you want to delete this item?') && this.desserts.splice(id, 1)
+        const index = this.desserts.indexOf(item)
+        var id = item.id
+        var r = confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
         if (r) {
           //发送删除请求
-        const path = `http://localhost:5000/api/settingDelete/`;
-        axios.delete(path, {
-          id
-        }).then(response => {
-            console.log(response.data),
-            this.desserts = response.data
-          })
-          .catch(error => {
-            console.log(error)
-          })
+          const path = `http://localhost:5000/api/settingDelete/`;
+          axios.post(path, {
+              id
+            }).then(response => {
+              console.log(response.data),
+                this.desserts = response.data
+                // this.$router.push('/setting') 
+            })
+            .catch(error => {
+              console.log(error)
+            })
         }
       },
 
@@ -176,13 +171,49 @@
         }, 300)
       },
 
-      save() {
-        if (this.editedIndex > -1) {
-          Object.assign(this.desserts[this.editedIndex], this.editedItem)
+      save(item) {
+        // if (this.editedIndex > -1) {
+        //   Object.assign(this.desserts[this.editedIndex], this.editedItem)
+        // } else {
+        //   this.desserts.push(this.editedItem)
+
+        // }
+        //发送修改请求
+        if (this.new) {
+          const path = `http://localhost:5000/api/settingNew/`;
+          axios.post(path, {
+              id: item.id,
+              area: item.area,
+              rules: item.rules
+            }).then(response => {
+              console.log(response.data),
+                this.desserts = response.data
+                Vue.set(this.desserts)
+            })
+            .catch(error => {
+              console.log(error)
+            })
+          this.close()
+          this.new = false
         } else {
-          this.desserts.push(this.editedItem)
+          const path = `http://localhost:5000/api/settingSave/`;
+          axios.post(path, {
+              id: item.id,
+              area: item.area,
+              rules: item.rules
+            }).then(response => {
+              console.log(response.data),
+                this.desserts = response.data
+            })
+            .catch(error => {
+              console.log(error)
+            })
+          this.close()
         }
-        this.close()
+      },
+
+      setNew () {
+        this.new = true
       }
     }
   }

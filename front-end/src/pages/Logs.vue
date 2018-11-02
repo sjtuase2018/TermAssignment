@@ -11,8 +11,8 @@
         sort-icon="mdi-menu-down" class="elevation-1">
         <template slot="items" slot-scope="props">
           <td class="text-xs-center">{{ props.item.area }}</td>
-          <td class="text-xs-center">{{ props.item.hazardCategory }}</td>
-          <td class="text-xs-center">{{ props.item.time }}</td>
+          <td class="text-xs-center">{{ props.item.rule }}</td>
+          <td class="text-xs-center">{{ props.item.date }}</td>
           <td class="text-xs-center">
             <v-dialog v-model="dialog" width="500">
               <v-btn slot="activator" color="red lighten-2" dark>
@@ -22,13 +22,8 @@
                 <v-card-title class="headline grey" primary-title>
                   PictureShot
                 </v-card-title>
-                <v-img :src= "props.item.imgUrl"/>
                 <v-card-text>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                  qui officia deserunt mollit anim id est laborum.
+                  <v-img :src="props.item.pic_path" />
                 </v-card-text>
                 <v-divider></v-divider>
                 <v-card-actions>
@@ -40,9 +35,6 @@
               </v-card>
             </v-dialog>
           </td>
-        </template>
-        <template slot="no-data">
-          <v-btn color="primary" @click="initialize">Reset</v-btn>
         </template>
         <v-alert slot="no-results" :value="true" color="error" icon="warning">
           Your search for "{{ search }}" found no results.
@@ -59,7 +51,7 @@
       dialog: false,
       search: '',
       pagesize: 10,
-      sortby: 'time',
+      sortby: 'date',
       startwith: 0,
       headers: [{
           text: 'Area',
@@ -68,22 +60,22 @@
           value: 'area'
         },
         {
-          text: 'HazardCategory',
+          text: 'Rule',
           sortable: false,
           align: 'center',
-          value: 'hazardCategory'
+          value: 'rule'
         },
         {
-          text: 'Time',
-          sortable: false,
+          text: 'Date',
+          sortable: true,
           align: 'center',
-          value: 'time'
+          value: 'date'
         },
         {
           text: 'PictureShot',
           sortable: false,
           align: 'center',
-          value: 'pictureShot'
+          value: 'pic_path'
         },
       ],
       desserts: [],
@@ -91,14 +83,14 @@
       editedItem: {
         date: '',
         area: 0,
-        hazardCategory: 0,
-        time: ''
+        rule: 0,
+        pic_path: ''
       },
       defaultItem: {
         date: '',
         area: 0,
-        hazardCategory: 'A',
-        time: ''
+        rule: 'A',
+        pic_path: ''
       }
     }),
 
@@ -115,23 +107,26 @@
     },
 
     created() {
+      this.getLogs();
+    },
+
+    methods: {
+      showPicture() {
+        this.dialog = true
+      },
+      getLogs() {
         const path = `http://localhost:5000/api/getLogs/`;
-        axios.post(path,{
-          pagesize: 10,
-          sortby: 'time',
-          startwith: 0,
-        }).then(response => {
+        axios.post(path, {
+            pagesize: this.pagesize,
+            sortby: this.sortby,
+            startwith: this.startwith,
+          }).then(response => {
             console.log(response.data),
             this.desserts = response.data
           })
           .catch(error => {
             console.log(error)
           })
-    },
-
-    methods: {
-      showPicture() {
-        this.dialog = true
       }
     }
   }
