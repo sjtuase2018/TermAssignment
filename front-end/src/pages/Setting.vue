@@ -155,6 +155,7 @@
             }).then(response => {
               console.log(response.data),
                 this.desserts = response.data
+                this.$set(this.desserts)
                 // this.$router.push('/setting') 
             })
             .catch(error => {
@@ -165,10 +166,10 @@
 
       close() {
         this.dialog = false
-        setTimeout(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1
-        }, 300)
+        // setTimeout(() => {
+        //   this.editedItem = Object.assign({}, this.defaultItem)
+        //   this.editedIndex = -1
+        // }, 300)
       },
 
       save(item) {
@@ -188,7 +189,7 @@
             }).then(response => {
               console.log(response.data),
                 this.desserts = response.data
-                Vue.set(this.desserts)
+                this.$set(this.desserts)
             })
             .catch(error => {
               console.log(error)
@@ -204,6 +205,8 @@
             }).then(response => {
               console.log(response.data),
                 this.desserts = response.data
+                this.$set(this.desserts)
+
             })
             .catch(error => {
               console.log(error)

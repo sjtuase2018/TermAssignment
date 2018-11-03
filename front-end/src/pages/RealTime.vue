@@ -2,31 +2,32 @@
   <v-container>
     <div>
       <div class="player">
-        <swiper :options="swiperOptionTop" class="gallery-top" ref="swiperTop">
-          <swiper-slide class="slide-1">
-            <video-player class="vjs-custom-skin" ref="videoPlayer" :options="playerOptions" :playsinline="true" @play="onPlayerPlay($event)"
-              @pause="onPlayerPause($event)" @ended="onPlayerEnded($event)" @loadeddata="onPlayerLoadeddata($event)"
-              @waiting="onPlayerWaiting($event)" @playing="onPlayerPlaying($event)" @timeupdate="onPlayerTimeupdate($event)"
-              @canplay="onPlayerCanplay($event)" @canplaythrough="onPlayerCanplaythrough($event)" @ready="playerReadied"
-              @statechanged="playerStateChanged($event)">
-            </video-player>
-          </swiper-slide>
-          <swiper-slide class="slide-2"></swiper-slide>
-          <swiper-slide class="slide-3"></swiper-slide>
-          <swiper-slide class="slide-4"></swiper-slide>
-          <swiper-slide class="slide-5"></swiper-slide>
-          <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
-          <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
-        </swiper>
-        <!-- swiper2 Thumbs -->
-        <swiper :options="swiperOptionThumbs" class="gallery-thumbs" ref="swiperThumbs">
-          <swiper-slide class="slide-1"></swiper-slide>
-          <swiper-slide class="slide-2"></swiper-slide>
-          <swiper-slide class="slide-3"></swiper-slide>
-          <swiper-slide class="slide-4"></swiper-slide>
-          <swiper-slide class="slide-5"></swiper-slide>
-        </swiper>
+        <v-layout row wrap>
+          <v-flex>
+            <swiper :options="swiperOptionTop" class="gallery-top" ref="swiperTop">
+              <swiper-slide class="slide-1">
+                <video-player class="vjs-custom-skin" ref="videoPlayer" :options="playerOptions" :playsinline="true"
+                  @ready="playerReadied">
+                </video-player>
 
+              </swiper-slide>
+              <swiper-slide class="slide-2"></swiper-slide>
+              <swiper-slide class="slide-3"></swiper-slide>
+              <swiper-slide class="slide-4"></swiper-slide>
+              <swiper-slide class="slide-5"></swiper-slide>
+              <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
+              <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
+            </swiper>
+            <!-- swiper2 Thumbs -->
+            <swiper :options="swiperOptionThumbs" class="gallery-thumbs" ref="swiperThumbs">
+              <swiper-slide class="slide-1">1</swiper-slide>
+              <swiper-slide class="slide-2">2</swiper-slide>
+              <swiper-slide class="slide-3">3</swiper-slide>
+              <swiper-slide class="slide-4">4</swiper-slide>
+              <swiper-slide class="slide-5">5</swiper-slide>
+            </swiper>
+          </v-flex>
+        </v-layout>
       </div>
       <!-- <v-btn @click="getImg()"/> -->
       <!-- <img style="-webkit-user-select: none;" src="http://localhost:5000/api/video_feed/?camid=1" width="1037" height="583"> -->
@@ -57,9 +58,8 @@
         imgUrl: '',
         id: 1,
         playerOptions: {
-          height: '360',
+          height: '400',
           autoplay: true,
-          muted: true,
           language: 'en',
           playbackRates: [0.7, 1.0, 1.5, 2.0],
           sources: [{
@@ -73,7 +73,7 @@
         },
         swiperOptionTop: {
           spaceBetween: 10,
-          loop: false,
+          loop: true,
           loopedSlides: 5, //looped slides should be the same
           navigation: {
             nextEl: '.swiper-button-next',
@@ -92,15 +92,15 @@
     },
     mounted() {
       setTimeout(() => {
-        console.log('dynamic change options', this.player)
-        this.player.muted(false)
-      }, 5000),
-      this.$nextTick(() => {
-        const swiperTop = this.$refs.swiperTop.swiper
-        const swiperThumbs = this.$refs.swiperThumbs.swiper
-        swiperTop.controller.control = swiperThumbs
-        swiperThumbs.controller.control = swiperTop
-      })
+          console.log('dynamic change options', this.player)
+          this.player.muted(false)
+        }, 5000),
+        this.$nextTick(() => {
+          const swiperTop = this.$refs.swiperTop.swiper
+          const swiperThumbs = this.$refs.swiperThumbs.swiper
+          swiperTop.controller.control = swiperThumbs
+          swiperThumbs.controller.control = swiperTop
+        })
     },
     created() {
       // this.getImg();
@@ -119,38 +119,7 @@
           console.log(response)
         })
       },
-      // listen event
-      onPlayerPlay(player) {
-        // console.log('player play!', player)
-      },
-      onPlayerPause(player) {
-        // console.log('player pause!', player)
-      },
-      onPlayerEnded(player) {
-        // console.log('player ended!', player)
-      },
-      onPlayerLoadeddata(player) {
-        // console.log('player Loadeddata!', player)
-      },
-      onPlayerWaiting(player) {
-        // console.log('player Waiting!', player)
-      },
-      onPlayerPlaying(player) {
-        // console.log('player Playing!', player)
-      },
-      onPlayerTimeupdate(player) {
-        // console.log('player Timeupdate!', player.currentTime())
-      },
-      onPlayerCanplay(player) {
-        // console.log('player Canplay!', player)
-      },
-      onPlayerCanplaythrough(player) {
-        // console.log('player Canplaythrough!', player)
-      },
-      // or listen state event
-      playerStateChanged(playerCurrentState) {
-        // console.log('player current update state', playerCurrentState)
-      },
+
       // player is ready
       playerReadied(player) {
         // seek to 10s
@@ -168,39 +137,49 @@
   .swiper-container {
     background-color: #000;
   }
+
   .swiper-slide {
     background-size: cover;
     background-position: center;
+
     &.slide-1 {
-      background-image:url('/src/assets/images/surmon-1.jpg');
+      background-image: url('https://surmon-china.github.io/vue-quill-editor/static/images/surmon-1.jpg');
     }
+
     &.slide-2 {
-      background-image:url('/src/assets/images/surmon-2.jpg');
+      background-image: url('https://surmon-china.github.io/vue-quill-editor/static/images/surmon-2.jpg');
     }
+
     &.slide-3 {
-      background-image:url('/src/assets/images/surmon-3.jpg');
+      background-image: url('https://surmon-china.github.io/vue-quill-editor/static/images/surmon-3.jpg');
     }
+
     &.slide-4 {
-      background-image:url('/src/assets/images/surmon-4.jpg');
+      background-image: url('https://surmon-china.github.io/vue-quill-editor/static/images/surmon-4.jpg');
     }
+
     &.slide-5 {
-      background-image:url('/src/assets/images/surmon-5.jpg');
+      background-image: url('https://surmon-china.github.io/vue-quill-editor/static/images/surmon-5.jpg');
     }
   }
+
   .gallery-top {
-    height: 80%!important;
+    height: 80% !important;
     width: 100%;
   }
+
   .gallery-thumbs {
-    height: 20%!important;
+    height: 20% !important;
     box-sizing: border-box;
     padding: 10px 0;
   }
+
   .gallery-thumbs .swiper-slide {
     width: 25%;
     height: 100%;
     opacity: 0.4;
   }
+
   .gallery-thumbs .swiper-slide-active {
     opacity: 1;
   }

@@ -52,9 +52,9 @@
       register() {
         this.loading = true;
         if (this.password != this.repassword) {
-            alert('密码不一致！');
+            alert('密码不一致！')
             return 0;
-        };
+        }
         const path = `http://localhost:5000/api/register/`;
         axios.post(path, {
             username: this.username,
