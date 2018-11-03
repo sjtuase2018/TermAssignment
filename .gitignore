@@ -6,5 +6,5 @@ app.db
 /dist
 /.vscode
 *.log
-*.log.*
+*.log*
 

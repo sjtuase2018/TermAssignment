@@ -93,12 +93,21 @@ def AreaUpdate(areaid, **kw):
     # return update state
     area = Area.query.filter_by(id=areaid).first()
     if area is None:
+        print 'area is none'
         return False
     area.description = kw['name']
-    for rule in kw['rule_list']:
-        r = Rule.query.filter_by(description = rule).first()
+    rules = db.session.query(Rule).all()
+    print 1, area.rules
+    for rule in area.rules:
+        area.rules.remove(rule)
+    print 2, area.rules
+    rules = kw['rule_list'].split(',')
+    for rule in rules:
+        r = db.session.query(Rule).filter(Rule.description == rule).first()
         if r:
             area.rules.append(r)
+        else:
+            print 'can not find ', r
     db.session.add(area)
     db.session.commit()
     return True
@@ -110,13 +119,17 @@ def NewArea(name, rules):
     db.session.add(newArea)
     db.session.commit()
     newArea = Area.query.filter_by(description = name).first()
-    for rule in rules:
+    rules_list = rules.split(',')
+    for rule in rules_list:
         r = Rule.query.filter_by(description = rule).first()
         if r:
             newArea.rules.append(r)
+        else:
+            print 'can not find ', r
     db.session.add(newArea)
     db.session.commit()
     return True
+
 
 def DeleteArea(id):
     de = Area.query.filter_by(id=id).first()

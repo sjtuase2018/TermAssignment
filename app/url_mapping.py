@@ -90,7 +90,7 @@ def settingSave():
     print data 
     areaId = data['id']
     areaName = data['area']
-    rules = data['rules'] # list
+    rules = data['rules'] # string
     print rules
     if not areaId is None:
         AreaUpdate(areaId, name=areaName, rule_list=rules)

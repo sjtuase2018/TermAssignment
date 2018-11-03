@@ -1,104 +1,124 @@
-2018-10-28 21:34:03,476 ERROR: Exception on /index [GET] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
+2018-10-29 23:30:35,779 ERROR: Exception on /api/login/ [POST] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
 Traceback (most recent call last):
   File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
   File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
     rv = self.handle_user_exception(e)
+  File "g:\programs\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
   File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
     reraise(exc_type, exc_value, tb)
   File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
     rv = self.dispatch_request()
   File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask_login\utils.py", line 261, in decorated_view
-    return func(*args, **kwargs)
-  File "G:\programs\TermAssignment\app\url_mapping.py", line 15, in index
-    return render_template('index.html', title='HomePage')
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\templating.py", line 135, in render_template
-    context, ctx.app)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\templating.py", line 117, in _render
-    rv = template.render(context)
-  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 1008, in render
-    return self.environment.handle_exception(exc_info, True)
-  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
-    reraise(exc_type, exc_value, tb)
-  File "G:\programs\TermAssignment\app\templates\index.html", line 18, in top-level template code
-    <li><a href="{{ url_for('userprofile') }}?username={{ user }}">Profile</a></li>
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\helpers.py", line 356, in url_for
-    return appctx.app.handle_url_build_error(error, endpoint, values)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2061, in handle_url_build_error
-    reraise(exc_type, exc_value, tb)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\helpers.py", line 345, in url_for
-    force_external=external)
-  File "g:\programs\termassignment\venv\lib\site-packages\werkzeug\routing.py", line 1776, in build
-    raise BuildError(endpoint, values, method, self)
-BuildError: Could not build url for endpoint 'userprofile'. Did you forget to specify values ['username']?
-2018-10-28 21:34:03,680 ERROR: Exception on /index [GET] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
+  File "G:\TermAssignment\app\url_mapping.py", line 25, in login
+    u = Admin(data.username, data.password)
+NameError: global name 'data' is not defined
+2018-10-29 23:31:13,388 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-10-29 23:31:19,602 ERROR: Exception on /api/login/ [POST] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
 Traceback (most recent call last):
   File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
   File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
     rv = self.handle_user_exception(e)
+  File "g:\programs\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
   File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
     reraise(exc_type, exc_value, tb)
   File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
     rv = self.dispatch_request()
   File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask_login\utils.py", line 261, in decorated_view
-    return func(*args, **kwargs)
-  File "G:\programs\TermAssignment\app\url_mapping.py", line 15, in index
-    return render_template('index.html', title='HomePage')
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\templating.py", line 135, in render_template
-    context, ctx.app)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\templating.py", line 117, in _render
-    rv = template.render(context)
-  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 1008, in render
-    return self.environment.handle_exception(exc_info, True)
-  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
-    reraise(exc_type, exc_value, tb)
-  File "G:\programs\TermAssignment\app\templates\index.html", line 18, in top-level template code
-    <li><a href="{{ url_for('userprofile') }}?username={{ user }}">Profile</a></li>
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\helpers.py", line 356, in url_for
-    return appctx.app.handle_url_build_error(error, endpoint, values)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2061, in handle_url_build_error
-    reraise(exc_type, exc_value, tb)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\helpers.py", line 345, in url_for
-    force_external=external)
-  File "g:\programs\termassignment\venv\lib\site-packages\werkzeug\routing.py", line 1776, in build
-    raise BuildError(endpoint, values, method, self)
-BuildError: Could not build url for endpoint 'userprofile'. Did you forget to specify values ['username']?
-2018-10-28 21:35:32,147 INFO: server startup [in G:\programs\TermAssignment\app\__init__.py:27]
-2018-10-28 21:35:34,938 ERROR: Exception on /index [GET] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
+  File "G:\TermAssignment\app\url_mapping.py", line 25, in login
+    u = Admin(data.username, data.password)
+AttributeError: 'dict' object has no attribute 'username'
+2018-10-29 23:32:40,996 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-10-29 23:32:45,371 ERROR: Exception on /api/login/ [POST] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
 Traceback (most recent call last):
   File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
   File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
     rv = self.handle_user_exception(e)
+  File "g:\programs\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
   File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
     reraise(exc_type, exc_value, tb)
   File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
     rv = self.dispatch_request()
   File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask_login\utils.py", line 261, in decorated_view
-    return func(*args, **kwargs)
-  File "G:\programs\TermAssignment\app\url_mapping.py", line 15, in index
-    return render_template('index.html', title='HomePage')
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\templating.py", line 134, in render_template
-    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
-  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 869, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 830, in get_template
-    return self._load_template(name, self.make_globals(globals))
-  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 804, in _load_template
-    template = self.loader.load(self, name, globals)
-  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\loaders.py", line 125, in load
-    code = environment.compile(source, name, filename)
-  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 591, in compile
-    self.handle_exception(exc_info, source_hint=source_hint)
-  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+  File "G:\TermAssignment\app\url_mapping.py", line 26, in login
+    u = Admin(data.user_name, data.password)
+AttributeError: 'dict' object has no attribute 'user_name'
+2018-10-29 23:44:36,134 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-10-29 23:44:44,217 ERROR: Exception on /api/login/ [POST] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
+Traceback (most recent call last):
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "g:\programs\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
     reraise(exc_type, exc_value, tb)
-  File "G:\programs\TermAssignment\app\templates\index.html", line 18, in template
-    <li><a href="{{ url_for('userprofile'), username= user }}">Profile</a></li>
-TemplateSyntaxError: expected token 'end of print statement', got '='
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "G:\TermAssignment\app\url_mapping.py", line 26, in login
+    u = Admin(a, b)
+TypeError: __init__() takes exactly 1 argument (3 given)
+2018-10-29 23:45:49,842 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-10-31 10:21:45,767 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-10-31 10:22:05,505 ERROR: Exception on /api/getCamera/ [GET] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
+Traceback (most recent call last):
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "g:\programs\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "G:\TermAssignment\app\url_mapping.py", line 37, in getCamera
+    jsn = json.dumps(cam)
+  File "c:\python27\Lib\json\__init__.py", line 244, in dumps
+    return _default_encoder.encode(obj)
+  File "c:\python27\Lib\json\encoder.py", line 207, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "c:\python27\Lib\json\encoder.py", line 270, in iterencode
+    return _iterencode(o, 0)
+  File "c:\python27\Lib\json\encoder.py", line 184, in default
+    raise TypeError(repr(o) + " is not JSON serializable")
+TypeError: <Video 1> is not JSON serializable
+2018-10-31 10:22:35,092 ERROR: Exception on /api/getCamera/ [GET] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
+Traceback (most recent call last):
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "g:\programs\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "G:\TermAssignment\app\url_mapping.py", line 37, in getCamera
+    jsn = json.dumps(cam)
+  File "c:\python27\Lib\json\__init__.py", line 244, in dumps
+    return _default_encoder.encode(obj)
+  File "c:\python27\Lib\json\encoder.py", line 207, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "c:\python27\Lib\json\encoder.py", line 270, in iterencode
+    return _iterencode(o, 0)
+  File "c:\python27\Lib\json\encoder.py", line 184, in default
+    raise TypeError(repr(o) + " is not JSON serializable")
+TypeError: <Video 1> is not JSON serializable
+2018-10-31 10:37:45,086 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]

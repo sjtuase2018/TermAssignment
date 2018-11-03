@@ -2,6 +2,19 @@
   <div id="login">
     <v-app id="inspire">
       <v-content>
+        <v-dialog v-model="dialog" width="500">
+          <v-card>
+            <v-card-text>
+              <v-alert :value="alertSuccessed" color="success" icon="check_circle" outline>
+                This is a success alert.
+              </v-alert>
+              <v-alert :value="alertFailure" color="error" icon="warning" outline>
+                This is a error alert.
+              </v-alert>
+            </v-card-text>
+          </v-card>
+        </v-dialog>
+
         <v-container fluid fill-height>
           <v-layout align-center justify-center>
             <v-flex xs12 sm8 md4>
@@ -13,15 +26,19 @@
                 <v-card-text>
                   <v-form>
                     <v-text-field prepend-icon="person" name="login" label="Login" id="username" type="text" v-model="username"></v-text-field>
-                    <v-text-field prepend-icon="lock" name="password" label="Password" id="password" type="password" v-model="password"></v-text-field>
-                    <v-text-field prepend-icon="lock" name="repassword" label="rePassword" id="repassword" type="password" v-model="repassword"></v-text-field>
+                    <v-text-field prepend-icon="lock" name="password" label="Password" id="password" type="password"
+                      v-model="password"></v-text-field>
+                    <v-text-field prepend-icon="lock" name="repassword" label="rePassword" id="repassword" type="password"
+                      v-model="repassword"></v-text-field>
                   </v-form>
                 </v-card-text>
                 <v-card-actions>
                   <!-- <v-btn color="primary" @click="register" :loading="loading">Regi</v-btn> -->
-                  <router-link to='/login'><p>&nbsp;&nbsp;go to login?</p></router-link>
+                  <router-link to='/login'>
+                    <p>&nbsp;&nbsp;go to login?</p>
+                  </router-link>
                   <v-spacer></v-spacer>
-                  
+
                   <v-btn color="primary" @click="register" :loading="loading">Register</v-btn>
                 </v-card-actions>
               </v-card>
@@ -41,6 +58,9 @@
       msg: String
     },
     data: () => ({
+      dialog: false,
+      alertSuccessed: false,
+      alertFailure: false,
       loading: false,
       username: '',
       password: '',
@@ -52,8 +72,8 @@
       register() {
         this.loading = true;
         if (this.password != this.repassword) {
-            alert('密码不一致！')
-            return 0;
+          alert('密码不一致！')
+          return 0;
         }
         const path = `http://localhost:5000/api/register/`;
         axios.post(path, {
@@ -62,12 +82,22 @@
           }).then(response => {
             console.log(response.data)
             this.hello = response.data.hello
-            if (parseInt(response.data.code) === 200){
-              this.$router.push('/login')              
+            if (parseInt(response.data.code) === 200) {
+              this.$router.push('/login')
             }
+            this.dialog = true;
+            this.alertSuccessed = true;
+            setTimeout(()=>{
+              this.dialog = false
+            }, 1000)
           })
           .catch(error => {
             console.log(error)
+            this.dialog = true;
+            this.alertFailure = true;
+            setTimeout(()=>{
+              this.dialog = false
+            }, 3000)
           })
       }
     }

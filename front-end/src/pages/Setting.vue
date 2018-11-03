@@ -59,8 +59,7 @@
     data: () => ({
       dialog: false,
       new: false,
-      headers: [
-        {
+      headers: [{
           text: 'Area (地区）',
           align: 'center',
           sortable: false,
@@ -84,12 +83,12 @@
       editedItem: {
         id: '',
         area: 0,
-        rules: ['无人区','安全帽','工作服'],
+        rules: ['无人区', '安全帽', '工作服'],
       },
       defaultItem: {
         id: '',
         area: 0,
-        rules: ['无人区','安全帽','工作服'],
+        rules: ['无人区', '安全帽', '工作服'],
       }
     }),
 
@@ -154,9 +153,10 @@
               id
             }).then(response => {
               console.log(response.data),
-                this.desserts = response.data
-                this.$set(this.desserts)
+                // this.desserts = response.data
+                // this.$set(this.desserts)
                 // this.$router.push('/setting') 
+                this.getCamera()
             })
             .catch(error => {
               console.log(error)
@@ -166,10 +166,10 @@
 
       close() {
         this.dialog = false
-        // setTimeout(() => {
-        //   this.editedItem = Object.assign({}, this.defaultItem)
-        //   this.editedIndex = -1
-        // }, 300)
+        setTimeout(() => {
+          this.editedItem = Object.assign({}, this.defaultItem)
+          this.editedIndex = -1
+        }, 300)
       },
 
       save(item) {
@@ -177,7 +177,6 @@
         //   Object.assign(this.desserts[this.editedIndex], this.editedItem)
         // } else {
         //   this.desserts.push(this.editedItem)
-
         // }
         //发送修改请求
         if (this.new) {
@@ -187,9 +186,15 @@
               area: item.area,
               rules: item.rules
             }).then(response => {
-              console.log(response.data),
-                this.desserts = response.data
-                this.$set(this.desserts)
+              console.log(response.data);
+              // this.desserts = response.data
+              // this.$set(this.desserts)
+              this.getCamera()
+              if (this.editedIndex > -1) {
+                Object.assign(this.desserts[this.editedIndex], item)
+              } else {
+                this.desserts.push(item)
+              }
             })
             .catch(error => {
               console.log(error)
@@ -203,10 +208,10 @@
               area: item.area,
               rules: item.rules
             }).then(response => {
-              console.log(response.data),
-                this.desserts = response.data
-                this.$set(this.desserts)
-
+              console.log(response.data);
+              // this.desserts = response.data
+              // this.$set(this.desserts)
+              this.getCamera()
             })
             .catch(error => {
               console.log(error)
@@ -215,7 +220,7 @@
         }
       },
 
-      setNew () {
+      setNew() {
         this.new = true
       }
     }

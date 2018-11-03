@@ -18,7 +18,7 @@
     </v-content>
     <v-toolbar app fixed clipped-left>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>Intelligent Humanoid Recognition System</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-menu offset-y origin="center center" :nudge-bottom="10" transition="scale-transition">
         <v-btn icon large flat slot="activator">
@@ -40,7 +40,7 @@
       </v-menu>
     </v-toolbar>
     <v-footer app fixed>
-      <span>&copy; 2017</span>
+      <span>&copy; 2018</span>
     </v-footer>
   </v-app>
 </template>

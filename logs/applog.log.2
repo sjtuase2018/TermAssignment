@@ -1,124 +1,122 @@
-2018-10-29 23:30:35,779 ERROR: Exception on /api/login/ [POST] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
+2018-11-03 19:17:20,678 ERROR: Exception on /api/settingSave/ [POST] [in g:\termassignment\venv\lib\site-packages\flask\app.py:1761]
 Traceback (most recent call last):
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+  File "g:\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
     return cors_after_request(app.make_response(f(*args, **kwargs)))
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
     reraise(exc_type, exc_value, tb)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
     rv = self.dispatch_request()
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "G:\TermAssignment\app\url_mapping.py", line 25, in login
-    u = Admin(data.username, data.password)
-NameError: global name 'data' is not defined
-2018-10-29 23:31:13,388 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
-2018-10-29 23:31:19,602 ERROR: Exception on /api/login/ [POST] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
+  File "G:\TermAssignment\app\url_mapping.py", line 96, in settingSave
+    AreaUpdate(areaId, name=areaName, rule_list=rules)
+  File "G:\TermAssignment\app\db_io.py", line 100, in AreaUpdate
+    area_rules.query.filter_by()
+AttributeError: 'Table' object has no attribute 'query'
+2018-11-03 19:19:15,334 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-03 19:19:22,148 ERROR: Exception on /api/settingSave/ [POST] [in g:\termassignment\venv\lib\site-packages\flask\app.py:1761]
 Traceback (most recent call last):
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+  File "g:\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
     return cors_after_request(app.make_response(f(*args, **kwargs)))
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
     reraise(exc_type, exc_value, tb)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
     rv = self.dispatch_request()
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "G:\TermAssignment\app\url_mapping.py", line 25, in login
-    u = Admin(data.username, data.password)
-AttributeError: 'dict' object has no attribute 'username'
-2018-10-29 23:32:40,996 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
-2018-10-29 23:32:45,371 ERROR: Exception on /api/login/ [POST] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
+  File "G:\TermAssignment\app\url_mapping.py", line 96, in settingSave
+    AreaUpdate(areaId, name=areaName, rule_list=rules)
+  File "G:\TermAssignment\app\db_io.py", line 100, in AreaUpdate
+    area_rules.query.filter_by()
+AttributeError: 'Table' object has no attribute 'query'
+2018-11-03 19:28:40,155 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-03 19:28:54,545 ERROR: Exception on /api/settingSave/ [POST] [in g:\termassignment\venv\lib\site-packages\flask\app.py:1761]
 Traceback (most recent call last):
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+  File "g:\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
     return cors_after_request(app.make_response(f(*args, **kwargs)))
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
     reraise(exc_type, exc_value, tb)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
     rv = self.dispatch_request()
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "G:\TermAssignment\app\url_mapping.py", line 26, in login
-    u = Admin(data.user_name, data.password)
-AttributeError: 'dict' object has no attribute 'user_name'
-2018-10-29 23:44:36,134 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
-2018-10-29 23:44:44,217 ERROR: Exception on /api/login/ [POST] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
+  File "G:\TermAssignment\app\url_mapping.py", line 96, in settingSave
+    AreaUpdate(areaId, name=areaName, rule_list=rules)
+  File "G:\TermAssignment\app\db_io.py", line 99, in AreaUpdate
+    area_rules.remove().all()
+AttributeError: 'Table' object has no attribute 'remove'
+2018-11-03 19:29:09,121 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-03 19:29:16,010 ERROR: Exception on /api/settingSave/ [POST] [in g:\termassignment\venv\lib\site-packages\flask\app.py:1761]
 Traceback (most recent call last):
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+  File "g:\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
     return cors_after_request(app.make_response(f(*args, **kwargs)))
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
     reraise(exc_type, exc_value, tb)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
     rv = self.dispatch_request()
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "G:\TermAssignment\app\url_mapping.py", line 26, in login
-    u = Admin(a, b)
-TypeError: __init__() takes exactly 1 argument (3 given)
-2018-10-29 23:45:49,842 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
-2018-10-31 10:21:45,767 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
-2018-10-31 10:22:05,505 ERROR: Exception on /api/getCamera/ [GET] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
+  File "G:\TermAssignment\app\url_mapping.py", line 96, in settingSave
+    AreaUpdate(areaId, name=areaName, rule_list=rules)
+  File "G:\TermAssignment\app\db_io.py", line 99, in AreaUpdate
+    area.rules.remove().all()
+TypeError: remove() takes at least 2 arguments (1 given)
+2018-11-03 19:33:02,428 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-03 19:33:07,517 ERROR: Exception on /api/settingSave/ [POST] [in g:\termassignment\venv\lib\site-packages\flask\app.py:1761]
 Traceback (most recent call last):
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+  File "g:\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
     return cors_after_request(app.make_response(f(*args, **kwargs)))
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
     reraise(exc_type, exc_value, tb)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
     rv = self.dispatch_request()
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "G:\TermAssignment\app\url_mapping.py", line 37, in getCamera
-    jsn = json.dumps(cam)
-  File "c:\python27\Lib\json\__init__.py", line 244, in dumps
-    return _default_encoder.encode(obj)
-  File "c:\python27\Lib\json\encoder.py", line 207, in encode
-    chunks = self.iterencode(o, _one_shot=True)
-  File "c:\python27\Lib\json\encoder.py", line 270, in iterencode
-    return _iterencode(o, 0)
-  File "c:\python27\Lib\json\encoder.py", line 184, in default
-    raise TypeError(repr(o) + " is not JSON serializable")
-TypeError: <Video 1> is not JSON serializable
-2018-10-31 10:22:35,092 ERROR: Exception on /api/getCamera/ [GET] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
+  File "G:\TermAssignment\app\url_mapping.py", line 96, in settingSave
+    AreaUpdate(areaId, name=areaName, rule_list=rules)
+  File "G:\TermAssignment\app\db_io.py", line 99, in AreaUpdate
+    a_rules = area.rules.all()
+AttributeError: 'InstrumentedList' object has no attribute 'all'
+2018-11-03 19:36:45,263 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-03 19:36:52,170 ERROR: Exception on /api/settingSave/ [POST] [in g:\termassignment\venv\lib\site-packages\flask\app.py:1761]
 Traceback (most recent call last):
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+  File "g:\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
     return cors_after_request(app.make_response(f(*args, **kwargs)))
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
     reraise(exc_type, exc_value, tb)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
     rv = self.dispatch_request()
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "G:\TermAssignment\app\url_mapping.py", line 37, in getCamera
-    jsn = json.dumps(cam)
-  File "c:\python27\Lib\json\__init__.py", line 244, in dumps
-    return _default_encoder.encode(obj)
-  File "c:\python27\Lib\json\encoder.py", line 207, in encode
-    chunks = self.iterencode(o, _one_shot=True)
-  File "c:\python27\Lib\json\encoder.py", line 270, in iterencode
-    return _iterencode(o, 0)
-  File "c:\python27\Lib\json\encoder.py", line 184, in default
-    raise TypeError(repr(o) + " is not JSON serializable")
-TypeError: <Video 1> is not JSON serializable
-2018-10-31 10:37:45,086 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+  File "G:\TermAssignment\app\url_mapping.py", line 96, in settingSave
+    AreaUpdate(areaId, name=areaName, rule_list=rules)
+  File "G:\TermAssignment\app\db_io.py", line 101, in AreaUpdate
+    area.rules.remove(r)
+  File "g:\termassignment\venv\lib\site-packages\sqlalchemy\orm\collections.py", line 1053, in remove
+    fn(self, value)
+ValueError: list.remove(x): x not in list
+2018-11-03 19:38:01,901 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]

@@ -1,4 +1,4 @@
-2018-10-28 21:32:43,637 ERROR: Exception on /index [GET] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
+2018-10-29 10:37:18,148 ERROR: Exception on /logs [GET] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
 Traceback (most recent call last):
   File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
@@ -10,30 +10,26 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask_login\utils.py", line 261, in decorated_view
-    return func(*args, **kwargs)
-  File "G:\programs\TermAssignment\app\url_mapping.py", line 15, in index
-    return render_template('index.html', title='HomePage')
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\templating.py", line 135, in render_template
-    context, ctx.app)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\templating.py", line 117, in _render
-    rv = template.render(context)
-  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 1008, in render
-    return self.environment.handle_exception(exc_info, True)
+  File "G:\programs\TermAssignment\app\url_mapping.py", line 59, in logs
+    return render_template('logs.html')
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\templating.py", line 134, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 869, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 830, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 804, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\loaders.py", line 125, in load
+    code = environment.compile(source, name, filename)
+  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 591, in compile
+    self.handle_exception(exc_info, source_hint=source_hint)
   File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
     reraise(exc_type, exc_value, tb)
-  File "G:\programs\TermAssignment\app\templates\index.html", line 18, in top-level template code
-    <li><a href="{{ url_for('userprofile') }}?username={{ 'user' }}">Profile</a></li>
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\helpers.py", line 356, in url_for
-    return appctx.app.handle_url_build_error(error, endpoint, values)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2061, in handle_url_build_error
-    reraise(exc_type, exc_value, tb)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\helpers.py", line 345, in url_for
-    force_external=external)
-  File "g:\programs\termassignment\venv\lib\site-packages\werkzeug\routing.py", line 1776, in build
-    raise BuildError(endpoint, values, method, self)
-BuildError: Could not build url for endpoint 'userprofile?username=user'. Did you mean 'userprofile' instead?
-2018-10-28 21:32:44,591 ERROR: Exception on /index [GET] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
+  File "G:\programs\TermAssignment\app\templates\logs.html", line 34, in template
+    <td>[{{ log. }}]</td>
+TemplateSyntaxError: expected name or number
+2018-10-29 10:37:25,316 ERROR: Exception on /logs [GET] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
 Traceback (most recent call last):
   File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
@@ -45,30 +41,26 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask_login\utils.py", line 261, in decorated_view
-    return func(*args, **kwargs)
-  File "G:\programs\TermAssignment\app\url_mapping.py", line 15, in index
-    return render_template('index.html', title='HomePage')
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\templating.py", line 135, in render_template
-    context, ctx.app)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\templating.py", line 117, in _render
-    rv = template.render(context)
-  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 1008, in render
-    return self.environment.handle_exception(exc_info, True)
+  File "G:\programs\TermAssignment\app\url_mapping.py", line 59, in logs
+    return render_template('logs.html')
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\templating.py", line 134, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 869, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 830, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 804, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\loaders.py", line 125, in load
+    code = environment.compile(source, name, filename)
+  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 591, in compile
+    self.handle_exception(exc_info, source_hint=source_hint)
   File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
     reraise(exc_type, exc_value, tb)
-  File "G:\programs\TermAssignment\app\templates\index.html", line 18, in top-level template code
-    <li><a href="{{ url_for('userprofile') }}?username={{ 'user' }}">Profile</a></li>
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\helpers.py", line 356, in url_for
-    return appctx.app.handle_url_build_error(error, endpoint, values)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2061, in handle_url_build_error
-    reraise(exc_type, exc_value, tb)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\helpers.py", line 345, in url_for
-    force_external=external)
-  File "g:\programs\termassignment\venv\lib\site-packages\werkzeug\routing.py", line 1776, in build
-    raise BuildError(endpoint, values, method, self)
-BuildError: Could not build url for endpoint 'userprofile?username=user'. Did you mean 'userprofile' instead?
-2018-10-28 21:32:45,071 ERROR: Exception on /index [GET] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
+  File "G:\programs\TermAssignment\app\templates\logs.html", line 34, in template
+    <td>[{{ log. }}]</td>
+TemplateSyntaxError: expected name or number
+2018-10-29 10:37:29,276 ERROR: Exception on /logs [GET] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
 Traceback (most recent call last):
   File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
@@ -80,27 +72,59 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask_login\utils.py", line 261, in decorated_view
-    return func(*args, **kwargs)
-  File "G:\programs\TermAssignment\app\url_mapping.py", line 15, in index
-    return render_template('index.html', title='HomePage')
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\templating.py", line 135, in render_template
-    context, ctx.app)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\templating.py", line 117, in _render
-    rv = template.render(context)
-  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 1008, in render
-    return self.environment.handle_exception(exc_info, True)
+  File "G:\programs\TermAssignment\app\url_mapping.py", line 59, in logs
+    return render_template('logs.html')
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\templating.py", line 134, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 869, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 830, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 804, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\loaders.py", line 125, in load
+    code = environment.compile(source, name, filename)
+  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 591, in compile
+    self.handle_exception(exc_info, source_hint=source_hint)
   File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
     reraise(exc_type, exc_value, tb)
-  File "G:\programs\TermAssignment\app\templates\index.html", line 18, in top-level template code
-    <li><a href="{{ url_for('userprofile') }}?username={{ 'user' }}">Profile</a></li>
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\helpers.py", line 356, in url_for
-    return appctx.app.handle_url_build_error(error, endpoint, values)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2061, in handle_url_build_error
+  File "G:\programs\TermAssignment\app\templates\logs.html", line 34, in template
+    <td>[{{ log. }}]</td>
+TemplateSyntaxError: expected name or number
+2018-10-29 10:38:10,650 INFO: server startup [in G:\programs\TermAssignment\app\__init__.py:27]
+2018-10-29 10:38:16,007 ERROR: Exception on /logs [GET] [in g:\programs\termassignment\venv\lib\site-packages\flask\app.py:1761]
+Traceback (most recent call last):
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
     reraise(exc_type, exc_value, tb)
-  File "g:\programs\termassignment\venv\lib\site-packages\flask\helpers.py", line 345, in url_for
-    force_external=external)
-  File "g:\programs\termassignment\venv\lib\site-packages\werkzeug\routing.py", line 1776, in build
-    raise BuildError(endpoint, values, method, self)
-BuildError: Could not build url for endpoint 'userprofile?username=user'. Did you mean 'userprofile' instead?
-2018-10-28 21:32:53,382 INFO: server startup [in G:\programs\TermAssignment\app\__init__.py:27]
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "G:\programs\TermAssignment\app\url_mapping.py", line 59, in logs
+    return render_template('logs.html')
+  File "g:\programs\termassignment\venv\lib\site-packages\flask\templating.py", line 134, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 869, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 830, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 804, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\loaders.py", line 125, in load
+    code = environment.compile(source, name, filename)
+  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 591, in compile
+    self.handle_exception(exc_info, source_hint=source_hint)
+  File "g:\programs\termassignment\venv\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "G:\programs\TermAssignment\app\templates\logs.html", line 33, in template
+    <td>[{{ log.time }}]</td>
+TemplateSyntaxError: Unexpected end of template. Jinja was looking for the following tags: 'endfor' or 'else'. The innermost block that needs to be closed is 'for'.
+2018-10-29 10:38:40,494 INFO: server startup [in G:\programs\TermAssignment\app\__init__.py:27]
+2018-10-29 11:06:32,096 INFO: server startup [in app\__init__.py:27]
+2018-10-29 14:58:09,519 INFO: server startup [in G:\TermAssignment\app\__init__.py:31]
+2018-10-29 14:59:56,299 INFO: server startup [in G:\TermAssignment\app\__init__.py:31]
+2018-10-29 15:00:11,111 INFO: server startup [in G:\TermAssignment\app\__init__.py:31]
