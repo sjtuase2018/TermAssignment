@@ -10,13 +10,19 @@
 pip install virtualenv
 
 cd ../backend
+
 virtualenv venv
+
 virtualenv -p python3 venv
+
 venv\Scripts\activate
+
 pip install -r requirements.txt
 
 set FLASK_APP=run.py
+
 flask run
 
 退出
+
 venv\Scripts\deactivate
