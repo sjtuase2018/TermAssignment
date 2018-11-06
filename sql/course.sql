@@ -23,11 +23,11 @@ DROP TABLE IF EXISTS `admin`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `admin` (
-  `id` varchar(10) NOT NULL,
-  `user` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
-  `logintime` datetime(6) DEFAULT NULL,
-  `loginip` int(20) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(20) DEFAULT NULL,
+  `password` varchar(20) DEFAULT NULL,
+  `logintime` datetime DEFAULT NULL,
+  `loginip` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -49,7 +49,7 @@ DROP TABLE IF EXISTS `area`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `area` (
-  `id` varchar(10) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -65,61 +65,29 @@ LOCK TABLES `area` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `area_rule`
+-- Table structure for table `area_rules`
 --
 
-DROP TABLE IF EXISTS `area_rule`;
+DROP TABLE IF EXISTS `area_rules`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `area_rule` (
-  `id` varchar(10) NOT NULL,
-  `area_id` varchar(10) DEFAULT NULL,
-  `rule_id` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`id`),
+CREATE TABLE `area_rules` (
+  `area_id` int(11) DEFAULT NULL,
+  `rule_id` int(11) DEFAULT NULL,
   KEY `area_id` (`area_id`),
   KEY `rule_id` (`rule_id`),
-  CONSTRAINT `area_rule_ibfk_1` FOREIGN KEY (`area_id`) REFERENCES `area` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `area_rule_ibfk_2` FOREIGN KEY (`rule_id`) REFERENCES `rule` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+  CONSTRAINT `area_rules_ibfk_1` FOREIGN KEY (`area_id`) REFERENCES `area` (`id`),
+  CONSTRAINT `area_rules_ibfk_2` FOREIGN KEY (`rule_id`) REFERENCES `rule` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `area_rule`
+-- Dumping data for table `area_rules`
 --
 
-LOCK TABLES `area_rule` WRITE;
-/*!40000 ALTER TABLE `area_rule` DISABLE KEYS */;
-/*!40000 ALTER TABLE `area_rule` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `log`
---
-
-DROP TABLE IF EXISTS `log`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `log` (
-  `id` varchar(10) NOT NULL,
-  `date` datetime(6) DEFAULT NULL,
-  `pic_path` varchar(255) DEFAULT NULL,
-  `area_id` varchar(10) DEFAULT NULL,
-  `vedio_id` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `area_id` (`area_id`),
-  KEY `vedio_id` (`vedio_id`),
-  CONSTRAINT `log_ibfk_1` FOREIGN KEY (`area_id`) REFERENCES `area` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `log_ibfk_2` FOREIGN KEY (`vedio_id`) REFERENCES `vedio` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `log`
---
-
-LOCK TABLES `log` WRITE;
-/*!40000 ALTER TABLE `log` DISABLE KEYS */;
-/*!40000 ALTER TABLE `log` ENABLE KEYS */;
+LOCK TABLES `area_rules` WRITE;
+/*!40000 ALTER TABLE `area_rules` DISABLE KEYS */;
+/*!40000 ALTER TABLE `area_rules` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -130,7 +98,7 @@ DROP TABLE IF EXISTS `rule`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `rule` (
-  `id` varchar(10) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -146,57 +114,85 @@ LOCK TABLES `rule` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `rule_log`
+-- Table structure for table `rule_vlogs`
 --
 
-DROP TABLE IF EXISTS `rule_log`;
+DROP TABLE IF EXISTS `rule_vlogs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `rule_log` (
-  `id` varchar(10) NOT NULL,
-  `rule_id` varchar(10) DEFAULT NULL,
-  `log_id` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`id`),
+CREATE TABLE `rule_vlogs` (
+  `rule_id` int(11) DEFAULT NULL,
+  `vlog_id` int(11) DEFAULT NULL,
   KEY `rule_id` (`rule_id`),
-  KEY `log_id` (`log_id`),
-  CONSTRAINT `rule_log_ibfk_1` FOREIGN KEY (`rule_id`) REFERENCES `rule` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `rule_log_ibfk_2` FOREIGN KEY (`log_id`) REFERENCES `log` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+  KEY `vlog_id` (`vlog_id`),
+  CONSTRAINT `rule_vlogs_ibfk_1` FOREIGN KEY (`rule_id`) REFERENCES `rule` (`id`),
+  CONSTRAINT `rule_vlogs_ibfk_2` FOREIGN KEY (`vlog_id`) REFERENCES `vlog` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `rule_log`
+-- Dumping data for table `rule_vlogs`
 --
 
-LOCK TABLES `rule_log` WRITE;
-/*!40000 ALTER TABLE `rule_log` DISABLE KEYS */;
-/*!40000 ALTER TABLE `rule_log` ENABLE KEYS */;
+LOCK TABLES `rule_vlogs` WRITE;
+/*!40000 ALTER TABLE `rule_vlogs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `rule_vlogs` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `vedio`
+-- Table structure for table `video`
 --
 
-DROP TABLE IF EXISTS `vedio`;
+DROP TABLE IF EXISTS `video`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `vedio` (
-  `id` varchar(10) NOT NULL,
+CREATE TABLE `video` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `save_path` varchar(255) DEFAULT NULL,
-  `area_id` varchar(10) DEFAULT NULL,
+  `area_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `area_id` (`area_id`),
-  CONSTRAINT `vedio_ibfk_1` FOREIGN KEY (`area_id`) REFERENCES `area` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+  CONSTRAINT `video_ibfk_1` FOREIGN KEY (`area_id`) REFERENCES `area` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `vedio`
+-- Dumping data for table `video`
 --
 
-LOCK TABLES `vedio` WRITE;
-/*!40000 ALTER TABLE `vedio` DISABLE KEYS */;
-/*!40000 ALTER TABLE `vedio` ENABLE KEYS */;
+LOCK TABLES `video` WRITE;
+/*!40000 ALTER TABLE `video` DISABLE KEYS */;
+/*!40000 ALTER TABLE `video` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `vlog`
+--
+
+DROP TABLE IF EXISTS `vlog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vlog` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` datetime DEFAULT NULL,
+  `pic_path` varchar(255) DEFAULT NULL,
+  `area_id` int(11) DEFAULT NULL,
+  `video_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `area_id` (`area_id`),
+  KEY `video_id` (`video_id`),
+  CONSTRAINT `vlog_ibfk_1` FOREIGN KEY (`area_id`) REFERENCES `area` (`id`),
+  CONSTRAINT `vlog_ibfk_2` FOREIGN KEY (`video_id`) REFERENCES `video` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vlog`
+--
+
+LOCK TABLES `vlog` WRITE;
+/*!40000 ALTER TABLE `vlog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `vlog` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -208,4 +204,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-17 12:18:12
+-- Dump completed on 2018-10-21 15:33:06

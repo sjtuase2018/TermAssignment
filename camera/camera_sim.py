@@ -22,7 +22,7 @@ class Camera(object):
         if success:
             ret, jpeg = cv2.imencode('.jpg', image)  # Encode to JPEG
             if ret:
-                return jpeg.tobytes()
+                return jpeg
             else:
                 return None
         else:
