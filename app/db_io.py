@@ -97,10 +97,11 @@ def AreaUpdate(areaid, **kw):
         return False
     area.description = kw['name']
     rules = db.session.query(Rule).all()
-    print 1, area.rules
-    for rule in area.rules:
-        area.rules.remove(rule)
-    print 2, area.rules
+    area.rules = []
+    # print 1, area.rules
+    # for rule in area.rules:
+    #     area.rules.remove(rule)
+    # print 2, area.rules
     rules = kw['rule_list'].split(',')
     for rule in rules:
         r = db.session.query(Rule).filter(Rule.description == rule).first()
@@ -119,7 +120,8 @@ def NewArea(name, rules):
     db.session.add(newArea)
     db.session.commit()
     newArea = Area.query.filter_by(description = name).first()
-    rules_list = rules.split(',')
+    rules_list = rules
+    # rules_list = rules.split(',')
     for rule in rules_list:
         r = Rule.query.filter_by(description = rule).first()
         if r:
