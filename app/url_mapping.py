@@ -6,6 +6,8 @@ from db_io import Register, ExitUser, VarifyUser, LogQuery, GetWeekDayLogNum, Ge
 
 api = Blueprint('api', __name__)
 
+
+# register
 @api.route('/register/', methods=('POST',))
 def register():
     username = request.json['username']
@@ -16,6 +18,7 @@ def register():
     return jsonify({'code': 200, 'username': username, 'userId': id})
 
 
+# login
 @api.route('/login/', methods=('POST',))
 def login():
     username = request.json['username']
@@ -28,30 +31,7 @@ def login():
     return jsonify({'code': 400})
 
 
-@api.route('/getCamera/', methods=('GET',))
-def getCamera():
-    dict_areas = GetAreas()
-    list_re = []
-    for x in dict_areas.keys():
-        dict_tmp = GetRuleByArea(x)
-        dict_toAppend = {}
-        dict_toAppend['id'] = x
-        dict_toAppend['area'] = dict_areas[x]
-        dict_toAppend['rules'] = []
-        for y in dict_tmp.keys():
-            dict_toAppend['rules'].append(dict_tmp[y])
-        list_re.append(dict_toAppend)
-
-    return jsonify(list_re)
-
-
-@api.route('/getLogs/', methods=('GET','POST'))
-def getLogs():
-    data = request.get_json()
-    # print data
-    return jsonify(LogQuery(data['sortby'], data['pagesize'], data['startwith']))
-
-
+# charts
 @api.route('/getChart/', methods=('GET', 'POST'))
 def getChart():
     data = request.get_json()
@@ -82,6 +62,32 @@ def getChart():
     dict_re['name'] = list_names
 
     return jsonify(dict_re)
+
+
+# logs
+@api.route('/getLogs/', methods=('GET','POST'))
+def getLogs():
+    data = request.get_json()
+    # print data
+    return jsonify(LogQuery(data['sortby'], data['pagesize'], data['startwith']))
+
+
+# settings
+@api.route('/getCamera/', methods=('GET',))
+def getCamera():
+    dict_areas = GetAreas()
+    list_re = []
+    for x in dict_areas.keys():
+        dict_tmp = GetRuleByArea(x)
+        dict_toAppend = {}
+        dict_toAppend['id'] = x
+        dict_toAppend['area'] = dict_areas[x]
+        dict_toAppend['rules'] = []
+        for y in dict_tmp.keys():
+            dict_toAppend['rules'].append(dict_tmp[y])
+        list_re.append(dict_toAppend)
+
+    return jsonify(list_re)
 
 
 @api.route('/settingSave/', methods=('GET', 'POST'))

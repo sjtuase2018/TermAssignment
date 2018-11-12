@@ -7,23 +7,25 @@ class Camera(object):
 
     # def get_frame(self):
     #    return self.frames[int(time()) % 3]
+    _camid = None
 
     def __init__(self, camid):
-        self.video = cv2.VideoCapture('VideoFeeds/video' + camid + '.mpg')
+        self._camid = str(camid)
+        self.video = cv2.VideoCapture('VideoFeeds/video' + str(camid) + '.mpg')
 
     def __del__(self):
         self.video.release()
 
+    def get_camid(self):
+        return self._camid
 
-
-
-    def get_frame(self):
+    def get_frame(self, formatter=None):
         success, image = self.video.read()
         if success:
-            ret, jpeg = cv2.imencode('.jpg', image)  # Encode to JPEG
-            if ret:
-                return jpeg.tobytes()
+            if formatter == "jpeg":
+                _, jpeg = cv2.imencode('.jpg', image)  # Encode to JPEG
+                return jpeg
             else:
-                return None
+                return image
         else:
             return None

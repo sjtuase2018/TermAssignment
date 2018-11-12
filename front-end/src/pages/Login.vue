@@ -2,6 +2,18 @@
   <div id="login">
     <v-app id="inspire">
       <v-content>
+        <v-dialog v-model="dialog" width="500">
+          <v-card>
+            <v-card-text>
+              <v-alert :value="alertSuccessed" color="success" icon="check_circle" outline>
+                This is a success alert.
+              </v-alert>
+              <v-alert :value="alertFailure" color="error" icon="warning" outline>
+                {{alertText}}
+              </v-alert>
+            </v-card-text>
+          </v-card>
+        </v-dialog>
         <v-container fluid fill-height>
           <v-layout align-center justify-center>
             <v-flex xs12 sm8 md4>
@@ -13,14 +25,17 @@
                 <v-card-text>
                   <v-form>
                     <v-text-field prepend-icon="person" name="login" label="Login" id="username" type="text" v-model="username"></v-text-field>
-                    <v-text-field prepend-icon="lock" name="password" label="Password" id="password" type="password" v-model="password"></v-text-field>
+                    <v-text-field prepend-icon="lock" name="password" label="Password" id="password" type="password"
+                      v-model="password"></v-text-field>
                   </v-form>
                 </v-card-text>
                 <v-card-actions>
                   <!-- <v-btn color="primary" @click="register" :loading="loading">Regi</v-btn> -->
-                  <router-link to='/register'><p>&nbsp;&nbsp;go to register?</p></router-link>
+                  <router-link to='/register'>
+                    <p>&nbsp;&nbsp;go to register?</p>
+                  </router-link>
                   <v-spacer></v-spacer>
-                  
+
                   <v-btn color="primary" @click="login" :loading="loading">Login</v-btn>
                 </v-card-actions>
               </v-card>
@@ -40,9 +55,12 @@
       msg: String
     },
     data: () => ({
+      dialog: false,
       loading: false,
-      username: 'admin@isockde.com',
-      password: 'password',
+      alertFailure: false,
+      alertText: '',
+      username: 'admin',
+      password: '123456',
       hello: ''
     }),
 
@@ -54,10 +72,20 @@
             username: this.username,
             password: this.password
           }).then(response => {
-            console.log(response.data)
-            this.hello = response.data.hello
-            if (parseInt(response.data.code) === 200){
-              this.$router.push('/realTime')              
+            console.log(response.data);
+            this.hello = response.data.hello;
+            if (parseInt(response.data.code) === 200) {
+              this.$router.push('/realTime')
+            }
+            if (parseInt(response.data.code) === 400) {
+              this.loading = false;
+              this.dialog = true;
+              this.alertFailure = true;
+              this.alertText = 'no user';
+              setTimeout(()=>{
+                this.alertFailure = false;
+                this.dialog = false;
+              }, 3000)
             }
           })
           .catch(error => {

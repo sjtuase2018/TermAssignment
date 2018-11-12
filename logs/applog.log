@@ -86,3 +86,13 @@ Traceback (most recent call last):
     rules_list = rules.split(',')
 AttributeError: 'list' object has no attribute 'split'
 2018-11-09 20:35:41,563 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-11 22:29:45,397 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-11 22:33:21,536 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-11 22:39:43,269 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-11 22:41:47,082 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-11 22:44:48,467 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-11 22:45:58,730 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-11 22:48:01,556 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-11 22:50:06,451 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-11 22:53:27,887 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-12 08:52:03,411 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]

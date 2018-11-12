@@ -6,12 +6,11 @@
           <v-flex>
             <swiper :options="swiperOptionTop" class="gallery-top" ref="swiperTop">
               <swiper-slide class="slide-1">
-                <video-player class="vjs-custom-skin" ref="videoPlayer" :options="playerOptions" :playsinline="true"
-                  @ready="playerReadied">
-                </video-player>
+                <img class="videoImg" src="http://localhost:5000/api/video_feed/">
+              </swiper-slide>
+              <swiper-slide class="slide-2">
 
               </swiper-slide>
-              <swiper-slide class="slide-2"></swiper-slide>
               <swiper-slide class="slide-3"></swiper-slide>
               <swiper-slide class="slide-4"></swiper-slide>
               <swiper-slide class="slide-5"></swiper-slide>
@@ -42,14 +41,9 @@
     swiper,
     swiperSlide
   } from 'vue-awesome-swiper'
-  import 'videojs-flash'
-  import 'video.js/dist/video-js.css'
-  import {
-    videoPlayer
-  } from 'vue-video-player'
+
   export default {
     components: {
-      videoPlayer,
       swiper,
       swiperSlide
     },
@@ -57,20 +51,7 @@
       return {
         imgUrl: '',
         id: 1,
-        playerOptions: {
-          height: '400',
-          autoplay: true,
-          language: 'en',
-          playbackRates: [0.7, 1.0, 1.5, 2.0],
-          sources: [{
-            type: "video/mp4",
-            // mp4
-            src: "http://vjs.zencdn.net/v/oceans.mp4",
-            // webm
-            // src: "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm"
-          }],
-          poster: "https://surmon-china.github.io/vue-quill-editor/static/images/surmon-1.jpg",
-        },
+
         swiperOptionTop: {
           spaceBetween: 10,
           loop: true,
@@ -144,6 +125,9 @@
 
     &.slide-1 {
       background-image: url('https://surmon-china.github.io/vue-quill-editor/static/images/surmon-1.jpg');
+      // background-image: url();
+      // height: 600px;
+      // width: 800px;
     }
 
     &.slide-2 {
@@ -182,5 +166,10 @@
 
   .gallery-thumbs .swiper-slide-active {
     opacity: 1;
+  }
+
+  .videoImg {
+    width: 100%;
+    height: 100%;
   }
 </style>
