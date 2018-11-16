@@ -47,7 +47,16 @@ if not app.debug:
 # from app import url_mapping, entity_mapping
 # from app import video_stream
 # from app.url_mapping import api
-from entity_mapping import *
-from url_mapping import *
-from video_stream import *
+from app.entity_mapping import *
+from app.url_mapping import *
+from app.video_stream import *
 app.register_blueprint(api, url_prefix="/api")
+
+from signal_processor.figure_detect import *
+from app.db_io import GetAreas
+
+cams = [Camera(x) for x in GetAreas().keys()]
+print('all cams signal loaded')
+# bind figure_scanner to cam[0] by default
+figure_scanner = FigureCapturer(cams[0])
+
