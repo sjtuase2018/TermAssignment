@@ -1,0 +1,10 @@
+/venv
+*.pyc
+/migrations
+/logs
+app.db
+/dist
+/.vscode
+*.log
+*.log*
+*.mpg
