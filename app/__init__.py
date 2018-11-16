@@ -52,11 +52,11 @@ from app.url_mapping import *
 from app.video_stream import *
 app.register_blueprint(api, url_prefix="/api")
 
-from signal_processor.figure_detect import *
-from app.db_io import GetAreas
+# from signal_processor.figure_detect import *
+# from app.db_io import GetAreas
 
-cams = [Camera(x) for x in GetAreas().keys()]
-print('all cams signal loaded')
-# bind figure_scanner to cam[0] by default
-figure_scanner = FigureCapturer(cams[0])
+# cams = [Camera(x) for x in GetAreas().keys()]
+# print('all cams signal loaded')
+# # bind figure_scanner to cam[0] by default
+# figure_scanner = FigureCapturer(cams[0])
 
