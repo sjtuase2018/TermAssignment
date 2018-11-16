@@ -53,8 +53,8 @@ class Vlog(db.Model):
 
 class Admin(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_name = db.Column(db.String(20))
-    password = db.Column(db.String(20))
+    user_name = db.Column(db.String(64), index=True, unique=True)
+    password = db.Column(db.String(128))
     logintime = db.Column(db.DateTime)
     loginip = db.Column(db.Integer)
 

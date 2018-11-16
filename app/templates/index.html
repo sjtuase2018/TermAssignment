@@ -1,26 +1,14 @@
-<html>
-<head>
-    {% if title %}
-    <title>{{title}}</title>
-    {% else %}
-    <title>default title</title>
-    {% endif %}
-    <link href="/static/css/index.css" rel="stylesheet" type="text/css" />
-    <link href="{{ url_for('static', filename='css/index.css') }}">
- </head>
-<body>
-    <div class="header">header</div>
-    <div class="slide">
-            <li><a href="{{ url_for('realTime') }}">RealTime</a></li>
-            <li><a href="{{ url_for('charts') }}">Charts</a></li>
-            <li><a href="{{ url_for('logs') }}">Logs</a></li>
-            <li><a href="{{ url_for('settings') }}">Setting</a></li>
-            <li><a href="{{ url_for('userprofile', username= 'user') }}">Profile</a></li>        
-    </div>
-    <div class="container">
+{% extends "base.html" %}
 
-    </div>
-    <div class="footer">hehehe</div>
+{% block script %}
+<script src={{url_for('static', filename='script.js')}}></script>
+{% endblock %}
 
-</body>
-</html>
+{% block styles %}
+
+{% endblock %}
+
+{% block content %}
+<p>Hello, world</p>
+{% endblock %}
+

@@ -1,93 +1,126 @@
 # -*- coding: UTF-8 -*-
-from app import db
-# from flask_login import login_required, current_user, login_user, logout_user
-from flask import render_template, redirect, url_for, flash, request, Blueprint, jsonify
-# from flask_wtf import FlaskForm
-# from wtforms import SubmitField, StringField, PasswordField, BooleanField, TextAreaField
-# from wtforms.validators import DataRequired, ValidationError, EqualTo
-# from werkzeug.urls import url_parse
-# from app.entity_mapping import User
-# from models import db, User
-from entity_mapping import *
-import json
+from flask import request, Blueprint, jsonify
+from db_io import Register, ExitUser, VarifyUser, LogQuery, GetWeekDayLogNum, GetLogNumByRule, GetAreas, GetLogNumByArea, GetRuleByArea,\
+    AreaUpdate, NewArea, DeleteArea
+
 
 api = Blueprint('api', __name__)
 
+
+# register
+@api.route('/register/', methods=('POST',))
+def register():
+    username = request.json['username']
+    password = request.json['password']
+    if ExitUser(username):
+        return jsonify( {'error': 'already exit username'}), 400
+    id = Register(username, password)
+    return jsonify({'code': 200, 'username': username, 'userId': id})
+
+
+# login
 @api.route('/login/', methods=('POST',))
 def login():
-    # print(request)
-    # # print(data['username']) wrong
-    # print(data)
-    # username = request.get_json('username')
-    # password = request.json.get('password')
-    # if username and password:
-    #     print('ok')
-    a = request.json['username']
-    b = request.json['password']
-    if Admin.query.filter_by(user_name = a).first() == None:
-        u = Admin(user_name=a, password=b)
-        db.session.add(u)
-        db.session.commit()
-    return jsonify({'code': 200, 'hello': '11'})
+    username = request.json['username']
+    password = request.json['password']
+    if ExitUser(username):
+        id = VarifyUser(username, password)
+        print id
+        if id is not None:
+            return jsonify({'code': 200, 'username': username, 'userId': id})
+    return jsonify({'code': 400})
 
-@api.route('/getCamera/', methods=('GET',))
-def getCamera():
-    res = Area.query.all()
-    cam = Video.query.filter_by(id=1).first()
-    # temp = []
-    # for x in res:
-    #     temp.append(x.to_json())
-    # return jsonify(objects = temp)
-    return jsonify({
-            'id': '01',
-            'area': '101',
-            'hazardCategory': 'A'
-        },
-        {
-            'id': '02',
-            'area': '102',
-            'hazardCategory': 'B',
-        })
 
+# charts
+@api.route('/getChart/', methods=('GET', 'POST'))
+def getChart():
+    data = request.get_json()
+    stdate = data['startTime']
+    enddate = data['endTime']
+    list_weekday_num = GetWeekDayLogNum(stdate, enddate)
+    list_num_by_rule_1 = GetLogNumByRule(stdate, enddate, 1)
+    list_num_by_rule_2 = GetLogNumByRule(stdate, enddate, 2)
+    list_num_by_rule_3 = GetLogNumByRule(stdate, enddate, 3)
+
+    dict_area = GetAreas()
+    list_seriesData = []
+    list_names = []
+
+    for x in dict_area.keys():
+        dict_tmp = {}
+        dict_tmp['name'] = dict_area[x]
+        dict_tmp['value'] = GetLogNumByArea(stdate, enddate, x)
+        list_seriesData.append(dict_tmp)
+        list_names.append(dict_area[x])
+
+    dict_re = {}
+    dict_re['dataWeek'] = list_weekday_num
+    dict_re['dataM1'] = list_num_by_rule_1
+    dict_re['dataM2'] = list_num_by_rule_2
+    dict_re['dataM3'] = list_num_by_rule_3
+    dict_re['seriesData'] = list_seriesData
+    dict_re['name'] = list_names
+
+    return jsonify(dict_re)
+
+
+# logs
 @api.route('/getLogs/', methods=('GET','POST'))
 def getLogs():
     data = request.get_json()
-    print(data)
-    return jsonify({
-            'time': '2018.10.21/19:11:14',
-            'area': 101,
-            'hazardCategory': 'A'
-          },
-          {
-            'time': '2018.10.21/19:11:14',
-            'area': 101,
-            'hazardCategory': 'A'
-          },
-        )
+    # print data
+    return jsonify(LogQuery(data['sortby'], data['pagesize'], data['startwith']))
 
-@api.route('/getChart/', methods=('GET',))
-def getChart():
-    
-    return jsonify(
-        {
-            'dataWeek': [820, 932, 901, 934, 1290, 1330, 1320],
-            'dataM1': [6, 9, 10, 15, 25, 76, 135, 162, 32, 20, 6, 3],
-            'dataM2': [2, 5, 9, 26, 28, 70, 175, 182, 48, 18, 6, 2],
-            'dataM3': [1, 2, 3, 4, 5, 6, 7, 8, 9, 6, 4, 2],
-            'name': ['地区1', '地区2', '地区3'],
-            'value': [10, 10, 10]
-        }
-        )
 
-@api.route('/settingEdit/', methods=('POST',))
-def settingEdit():
+# settings
+@api.route('/getCamera/', methods=('GET',))
+def getCamera():
+    dict_areas = GetAreas()
+    list_re = []
+    for x in dict_areas.keys():
+        dict_tmp = GetRuleByArea(x)
+        dict_toAppend = {}
+        dict_toAppend['id'] = x
+        dict_toAppend['area'] = dict_areas[x]
+        dict_toAppend['rules'] = []
+        for y in dict_tmp.keys():
+            dict_toAppend['rules'].append(dict_tmp[y])
+        list_re.append(dict_toAppend)
+
+    return jsonify(list_re)
+
+
+@api.route('/settingSave/', methods=('GET', 'POST'))
+def settingSave():
     data = request.get_json()
-    print(data)
-    return jsonify({'code': 200, 'hello': '11'})
+    print data 
+    areaId = data['id']
+    areaName = data['area']
+    rules = data['rules'] # string
+    print rules
+    if not areaId is None:
+        AreaUpdate(areaId, name=areaName, rule_list=rules)
+        return jsonify({'code': 200})
+    else:
+        return jsonify({'code': 400})
+
+
+@api.route('/settingNew/', methods=('POST',))
+def settingNew():
+    data = request.get_json()
+    areaName = data['area']
+    appliedRules = data['rules'] # string 无人区,安全帽,
+    if NewArea(areaName, appliedRules):
+        return jsonify({'code': 200})
+    else:
+        return jsonify({'code', 400})
 
     
-@api.route('/settingDelete/', methods=('DELETE',))
+@api.route('/settingDelete/', methods=('POST',))
 def settingDelete():
     data = request.get_json()
-    print(data)
-    return jsonify({'code': 200, 'hello': '11'})
+    areaId = data['id']
+    if DeleteArea(areaId):
+        return jsonify({'code': 200})
+    else:
+        return 400

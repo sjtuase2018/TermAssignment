@@ -1,0 +1,15 @@
+click
+Flask
+Flask-Cors
+itsdangerous
+Jinja2
+MarkupSafe
+six
+Werkzeug
+flask_sqlalchemy
+flask_migrate
+requests
+flask_login
+flask_wtf
+opencv-python
+./MySQL_python-1.2.5-cp27-none-win_amd64.whl

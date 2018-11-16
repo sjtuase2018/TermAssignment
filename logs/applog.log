@@ -1,0 +1,98 @@
+2018-11-03 19:57:08,243 ERROR: Exception on /api/settingSave/ [POST] [in g:\termassignment\venv\lib\site-packages\flask\app.py:1761]
+Traceback (most recent call last):
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "g:\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "G:\TermAssignment\app\url_mapping.py", line 96, in settingSave
+    AreaUpdate(areaId, name=areaName, rule_list=rules)
+  File "G:\TermAssignment\app\db_io.py", line 101, in AreaUpdate
+    area.rules.remove(rule)
+  File "g:\termassignment\venv\lib\site-packages\sqlalchemy\orm\collections.py", line 1053, in remove
+    fn(self, value)
+ValueError: list.remove(x): x not in list
+2018-11-03 19:59:22,546 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-03 19:59:41,151 ERROR: Exception on /api/settingSave/ [POST] [in g:\termassignment\venv\lib\site-packages\flask\app.py:1761]
+Traceback (most recent call last):
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "g:\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "G:\TermAssignment\app\url_mapping.py", line 96, in settingSave
+    AreaUpdate(areaId, name=areaName, rule_list=rules)
+  File "G:\TermAssignment\app\db_io.py", line 102, in AreaUpdate
+    area.rules.remove(rule)
+  File "g:\termassignment\venv\lib\site-packages\sqlalchemy\orm\collections.py", line 1053, in remove
+    fn(self, value)
+ValueError: list.remove(x): x not in list
+2018-11-03 20:00:30,805 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-03 20:01:49,390 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-03 20:06:56,822 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-03 20:28:26,607 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-09 20:20:10,108 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-09 20:31:51,934 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-09 20:33:07,286 ERROR: Exception on /api/settingNew/ [POST] [in g:\termassignment\venv\lib\site-packages\flask\app.py:1761]
+Traceback (most recent call last):
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "g:\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "G:\TermAssignment\app\url_mapping.py", line 107, in settingNew
+    if NewArea(areaName, appliedRules):
+  File "G:\TermAssignment\app\db_io.py", line 123, in NewArea
+    rules_list = rules.split(',')
+AttributeError: 'list' object has no attribute 'split'
+2018-11-09 20:33:25,992 ERROR: Exception on /api/settingNew/ [POST] [in g:\termassignment\venv\lib\site-packages\flask\app.py:1761]
+Traceback (most recent call last):
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "g:\termassignment\venv\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "g:\termassignment\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "G:\TermAssignment\app\url_mapping.py", line 107, in settingNew
+    if NewArea(areaName, appliedRules):
+  File "G:\TermAssignment\app\db_io.py", line 123, in NewArea
+    rules_list = rules.split(',')
+AttributeError: 'list' object has no attribute 'split'
+2018-11-09 20:35:41,563 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-11 22:29:45,397 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-11 22:33:21,536 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-11 22:39:43,269 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-11 22:41:47,082 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-11 22:44:48,467 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-11 22:45:58,730 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-11 22:48:01,556 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-11 22:50:06,451 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-11 22:53:27,887 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]
+2018-11-12 08:52:03,411 INFO: server startup [in G:\TermAssignment\app\__init__.py:45]

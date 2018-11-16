@@ -3,6 +3,7 @@ import sys
 sys.path.append('../')
 from app import *
 import random
+from datetime import datetime
 #db = SQLAlchemy(app)
 # me = Admin('')
 #print db.metadata.tables
@@ -16,10 +17,6 @@ import random
 # db.session.commit()
 # A1 = Area.query.filter_by(id=1).first()
 # A1.rules.append(R1)#向关系表中添加
-
-# l1 = Vlog()
-
-# v1 = Video('VideoFeeds',1)
 
 # #rule
 # R1 = Rule('无人区')
@@ -113,5 +110,4 @@ import random
 #     a += 1
 
 # db.session.commit()
-
 
