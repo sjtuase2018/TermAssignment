@@ -5,7 +5,7 @@
         <v-toolbar-title>SEETTING</v-toolbar-title>
         <v-divider class="mx-2" inset vertical></v-divider>
         <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" max-width="500px">
+        <v-dialog v-model="dialog" max-width="560px">
           <v-btn slot="activator" color="primary" dark class="mb-2" @click="setNew">New Item</v-btn>
           <v-card>
             <v-card-title>
@@ -18,8 +18,15 @@
                   <v-flex xs12 sm6 md4>
                     <v-text-field v-model="editedItem.area" label="Area （地区）"></v-text-field>
                   </v-flex>
-                  <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.rules" label="Rules （危险类别）"></v-text-field>
+                  <v-flex xs12 sm6 md6>
+                    <!-- <v-text-field v-model="editedItem.rules" label="Rules （危险类别）">
+                    </v-text-field> -->
+                    Rules （危险类别）
+                    <v-layout row xs12 wrap>
+                      <v-checkbox v-model="editedItem.rules" label="无人区" value="无人区"></v-checkbox>
+                      <v-checkbox v-model="editedItem.rules" label="安全帽" value="安全帽"></v-checkbox>
+                      <v-checkbox v-model="editedItem.rules" label="工作服" value="工作服"></v-checkbox>
+                    </v-layout>
                   </v-flex>
                 </v-layout>
               </v-container>

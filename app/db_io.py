@@ -102,7 +102,8 @@ def AreaUpdate(areaid, **kw):
     # for rule in area.rules:
     #     area.rules.remove(rule)
     # print 2, area.rules
-    rules = kw['rule_list'].split(',')
+    # rules = kw['rule_list'].split(',')
+    rules = kw['rule_list']
     for rule in rules:
         r = db.session.query(Rule).filter(Rule.description == rule).first()
         if r:
