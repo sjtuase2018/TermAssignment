@@ -40,7 +40,7 @@
           </v-card>
         </v-dialog>
       </v-toolbar>
-      <v-data-table :headers="headers" :items="desserts" v-model="desserts" hide-actions class="elevation-1">
+      <v-data-table :headers="headers" :loading="loading" :items="desserts" v-model="desserts" hide-actions class="elevation-1">
         <template slot="items" slot-scope="props">
           <td class="text-xs-center">{{ props.item.area }}</td>
           <td class="text-xs-center">
@@ -66,6 +66,7 @@
     data: () => ({
       dialog: false,
       new: false,
+      loading: true,
       headers: [{
           text: 'Area (地区）',
           align: 'center',
@@ -130,6 +131,7 @@
           .catch(error => {
             console.log(error)
           })
+          .finally(() => this.loading = false);
       },
       editItem(item) {
         this.editedIndex = this.desserts.indexOf(item)

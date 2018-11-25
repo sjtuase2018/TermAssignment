@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 from flask import request, Blueprint, jsonify
-from db_io import Register, ExitUser, VarifyUser, LogQuery, GetWeekDayLogNum, GetLogNumByRule, GetAreas, GetLogNumByArea, GetRuleByArea,\
+from app.db_io import Register, ExitUser, VarifyUser, LogQuery, GetWeekDayLogNum, GetLogNumByRule, GetAreas, GetLogNumByArea, GetRuleByArea,\
     AreaUpdate, NewArea, DeleteArea
 
 
@@ -25,7 +25,6 @@ def login():
     password = request.json['password']
     if ExitUser(username):
         id = VarifyUser(username, password)
-        print id
         if id is not None:
             return jsonify({'code': 200, 'username': username, 'userId': id})
     return jsonify({'code': 400})
@@ -68,7 +67,9 @@ def getChart():
 @api.route('/getLogs/', methods=('GET','POST'))
 def getLogs():
     data = request.get_json()
-    # print data
+    print (data)
+    if 'search' in data:
+        return jsonify(LogQuery(data['sortby'], data['pagesize'], data['startwith'], data['search']))
     return jsonify(LogQuery(data['sortby'], data['pagesize'], data['startwith']))
 
 
@@ -93,11 +94,9 @@ def getCamera():
 @api.route('/settingSave/', methods=('GET', 'POST'))
 def settingSave():
     data = request.get_json()
-    print data 
     areaId = data['id']
     areaName = data['area']
     rules = data['rules'] # string
-    print rules
     if not areaId is None:
         AreaUpdate(areaId, name=areaName, rule_list=rules)
         return jsonify({'code': 200})

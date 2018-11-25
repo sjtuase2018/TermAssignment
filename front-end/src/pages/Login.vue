@@ -19,7 +19,7 @@
             <v-flex xs12 sm8 md4>
               <v-card class="elevation-12">
                 <v-toolbar dark color="primary">
-                  <v-toolbar-title>Login form</v-toolbar-title>
+                  <v-toolbar-title>Login</v-toolbar-title>
 
                 </v-toolbar>
                 <v-card-text>
@@ -81,7 +81,7 @@
               this.loading = false;
               this.dialog = true;
               this.alertFailure = true;
-              this.alertText = 'no user';
+              this.alertText = 'invalid';
               setTimeout(()=>{
                 this.alertFailure = false;
                 this.dialog = false;

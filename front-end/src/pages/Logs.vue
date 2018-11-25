@@ -5,17 +5,18 @@
         <v-toolbar-title>LOGS</v-toolbar-title>
         <v-divider class="mx-2" inset vertical></v-divider>
         <v-spacer></v-spacer>
-        <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>
+        
+        <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details @keyup.enter="getLogs"></v-text-field>
       </v-toolbar>
-      <v-data-table dark :headers="headers" :items="desserts" :search="search" prev-icon="skip_previous" next-icon="skip_next"
-        sort-icon="mdi-menu-down" class="elevation-1">
+      <v-data-table dark :headers="headers" :items="desserts" :pagination.sync="pagination" :total-items="totalDesserts"
+        :rows-per-page-items="rowsPerPageItems" :loading="loading" prev-icon="skip_previous" next-icon="skip_next" sort-icon="mdi-menu-down" class="elevation-1">
         <template slot="items" slot-scope="props">
           <td class="text-xs-center">{{ props.item.area }}</td>
           <td class="text-xs-center">{{ props.item.rule }}</td>
-          <td class="text-xs-center">{{ props.item.date }}</td>
+          <td class="text-xs-center">{{ props.item.date|moment("YYYY-MM-DD HH:mm:ss") }}</td>
           <td class="text-xs-center">
             <v-dialog v-model="dialog" width="500">
-              <v-btn slot="activator" color="red lighten-2" dark>
+              <v-btn slot="activator" color="primary" dark>
                 Click Me
               </v-btn>
               <v-card>
@@ -53,6 +54,10 @@
       pagesize: 10,
       sortby: 'date',
       startwith: 0,
+      totalDesserts: 0,
+      loading: true,
+      pagination: {},
+      rowsPerPageItems: [5, 10, 25, 100],
       headers: [{
           text: 'Area',
           sortable: false,
@@ -103,11 +108,29 @@
     watch: {
       dialog(val) {
         val || this.close()
+      },
+      pagination: {
+        handler() {
+          this.getDataFromApi()
+          // .then(data => {
+          //     this.desserts = data.items
+          //     this.totalDesserts = data.total
+          //   })
+        },
+        deep: true
       }
     },
 
+    mounted() {
+      this.getDataFromApi()
+      // .then(data => {
+      //     this.desserts = data.items
+      //     this.totalDesserts = data.total
+      //   })
+    },
+
     created() {
-      this.getLogs();
+      //this.getLogs();
     },
 
     methods: {
@@ -115,18 +138,45 @@
         this.dialog = true
       },
       getLogs() {
-        const path = `http://localhost:5000/api/getLogs/`;
-        axios.post(path, {
-            pagesize: this.pagesize,
-            sortby: this.sortby,
-            startwith: this.startwith,
-          }).then(response => {
-            console.log(response.data),
-            this.desserts = response.data
-          })
-          .catch(error => {
-            console.log(error)
-          })
+        if (this.search) {
+          const path = `http://localhost:5000/api/getLogs/`;
+          axios.post(path, {
+              pagesize: this.pagination.rowsPerPage,
+              sortby: this.pagination.sortBy,
+              startwith: (this.pagination.page - 1) * this.pagination.rowsPerPage,
+              search: this.search
+            }).then(response => {
+              //console.log(response.data),
+              this.desserts = response.data.logs
+              this.totalDesserts = response.data.length
+            })
+            .catch(error => {
+              console.log(error)
+            })
+            .finally(() => this.loading = false);
+        } else {
+          const path = `http://localhost:5000/api/getLogs/`;
+          axios.post(path, {
+              pagesize: this.pagination.rowsPerPage,
+              sortby: this.pagination.sortBy,
+              startwith: (this.pagination.page - 1) * this.pagination.rowsPerPage,
+            }).then(response => {
+              //console.log(response.data),
+              this.desserts = response.data.logs
+              this.totalDesserts = response.data.length
+            })
+            .catch(error => {
+              console.log(error)
+            })
+            .finally(() => this.loading = false);
+        }
+      },
+
+      getDataFromApi() {
+        this.loading = true
+
+        this.getLogs()
+
       },
 
     }

@@ -1,6 +1,32 @@
 <template>
   <div>
     <v-container grid-list-md text-xs-center>
+      <template>
+        <v-layout row wrap>
+          <v-flex xs16 sm8 md4 offset-xs2>
+            <v-menu ref="menuS" :close-on-content-click="false" v-model="menuS" :nudge-right="40" :return-value.sync="date"
+              lazy transition="scale-transition" offset-y full-width min-width="290px">
+              <v-text-field slot="activator" v-model="startTime" label="Start Date" prepend-icon="event" readonly></v-text-field>
+              <v-date-picker v-model="startTime" no-title scrollable></v-date-picker>
+            </v-menu>
+          </v-flex>
+          <v-spacer></v-spacer>
+          <v-flex xs16 sm8 md4>
+            <v-menu ref="menuE" :close-on-content-click="false" v-model="menuE" :nudge-right="40" :return-value.sync="date"
+              lazy transition="scale-transition" offset-y full-width min-width="290px">
+              <v-text-field slot="activator" v-model="endTime" label="End Date" prepend-icon="event" readonly></v-text-field>
+              <v-date-picker v-model="endTime" no-title scrollable></v-date-picker>
+            </v-menu>
+          </v-flex>
+          <v-spacer></v-spacer>
+          <v-flex xs16>
+            <v-btn icon @click="getChart">
+              <v-icon large>search</v-icon>
+            </v-btn>         
+          </v-flex>
+          <v-spacer></v-spacer>
+        </v-layout>
+      </template>
       <v-layout row wrap>
         <v-flex>
           <div id="myChartWeek" :style="{width: '400px', height: '400px'}"></div>
@@ -23,8 +49,10 @@
     data() {
       return {
         msg: 'Welcome to Your Vue.js App',
-        startTime: '2017-10-1',
-        endTime: '2018-11-1',
+        startTime: '2017-11-21',
+        endTime: new Date().toISOString().substr(0, 10),
+        menuS: false,
+        menuE: false,
         dataWeek: [],
         dataMoon: {
           dataM1: [],
@@ -53,16 +81,16 @@
       // console.log(this.dataWeek)
       const path = `http://localhost:5000/api/getChart/`;
       axios.post(path, {
-        startTime: this.startTime,
-        endTime: this.endTime
-      }).then(response => {
+          startTime: this.startTime,
+          endTime: this.endTime
+        }).then(response => {
           this.dataWeek = response.data.dataWeek,
-          this.dataMoon.dataM1 = response.data.dataM1,
-          this.dataMoon.dataM2 = response.data.dataM2,
-          this.dataMoon.dataM3 = response.data.dataM3,
-          this.dataArea.legendData = response.data.name;
+            this.dataMoon.dataM1 = response.data.dataM1,
+            this.dataMoon.dataM2 = response.data.dataM2,
+            this.dataMoon.dataM3 = response.data.dataM3,
+            this.dataArea.legendData = response.data.name;
           this.dataArea.seriesData = response.data.seriesData;
-         
+
           this.drawLine();
         })
         .catch(error => {
@@ -92,6 +120,26 @@
       //   })
     },
     methods: {
+      getChart() {
+        const path = `http://localhost:5000/api/getChart/`;
+        axios.post(path, {
+            startTime: this.startTime,
+            endTime: this.endTime
+          }).then(response => {
+            this.dataWeek = response.data.dataWeek,
+              this.dataMoon.dataM1 = response.data.dataM1,
+              this.dataMoon.dataM2 = response.data.dataM2,
+              this.dataMoon.dataM3 = response.data.dataM3,
+              this.dataArea.legendData = response.data.name;
+            this.dataArea.seriesData = response.data.seriesData;
+
+            this.drawLine();
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      },
+
       drawLine() {
         //myChartWeek
         // 基于准备好的dom，初始化echarts实例
@@ -137,7 +185,7 @@
             //selected: this.dataA.selected
           },
           series: [{
-            name: '姓名',
+            name: 'Area',
             type: 'pie',
             radius: '55%',
             center: ['40%', '50%'],

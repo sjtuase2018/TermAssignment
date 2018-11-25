@@ -12,4 +12,8 @@ requests
 flask_login
 flask_wtf
 opencv-python
-./MySQL_python-1.2.5-cp27-none-win_amd64.whl
+PyMySQL
+keras
+tensorflow
+Pillow
+matplotlib

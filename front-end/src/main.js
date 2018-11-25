@@ -15,3 +15,4 @@ new Vue({
 }).$mount('#app')
 
 Vue.prototype.$echarts = echarts
+Vue.use(require('vue-moment'));

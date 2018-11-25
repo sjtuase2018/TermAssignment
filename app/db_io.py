@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from entity_mapping import *
+from app.entity_mapping import *
 from sqlalchemy import and_,or_,not_
 
 def Register(username, password):
@@ -18,14 +18,29 @@ def ExitUser(username):
 def VarifyUser(username, password):
     user = Admin.query.filter_by(user_name=username).first()
     if user.check_password(password):
-        print user.id
+        print (user.id)
         return user.id
     return None
 
-def LogQuery(sortby, size, startwith):
-    print sortby, size, startwith
-    res = []
-    logs = Vlog.query.order_by(sortby).offset(startwith).limit(size)
+def LogQuery(sortby, size, startwith, search=None):
+    print (sortby, size, startwith, search)
+    logs_list = []  
+    if search == None:
+        logs = Vlog.query.order_by(sortby).offset(startwith).limit(size)
+        total = Vlog.query.count()
+    else:
+        logs = Vlog.query.filter(Vlog.date.contains(search))\
+            .order_by(sortby).offset(startwith).limit(size)
+        total = Vlog.query.filter(Vlog.date.contains(search))\
+            .order_by(sortby).count()
+        # query = Vlog.query.filter(Vlog.date.contains(search))
+        # # Vlog.query.filter(Vlog.rules.description.contains(search))
+        #     # Vlog.query.filter(Vlog.date.contains(search))
+        #     # .filter(Vlog.rules.contains(search)).order_by(sortby)
+        # print (query)
+        # logs = query.offset(startwith).limit(size)
+        # total = query.count()
+        # print (total)
     for log in logs:
         dict_tmp = {}
         dict_tmp['date'] = log.date
@@ -34,7 +49,10 @@ def LogQuery(sortby, size, startwith):
         dict_tmp['pic_path'] = log.pic_path
         for rule in log.rules:
             dict_tmp['rule'] += (rule.description + ' ')
-        res.append(dict_tmp)
+        logs_list.append(dict_tmp)
+    res = {}
+    res['logs'] = logs_list
+    res['length'] = total
     return res
 
 
@@ -93,7 +111,7 @@ def AreaUpdate(areaid, **kw):
     # return update state
     area = Area.query.filter_by(id=areaid).first()
     if area is None:
-        print 'area is none'
+        print ('area is none')
         return False
     area.description = kw['name']
     rules = db.session.query(Rule).all()
@@ -109,7 +127,7 @@ def AreaUpdate(areaid, **kw):
         if r:
             area.rules.append(r)
         else:
-            print 'can not find ', r
+            print ('can not find ', r)
     db.session.add(area)
     db.session.commit()
     return True
@@ -128,7 +146,7 @@ def NewArea(name, rules):
         if r:
             newArea.rules.append(r)
         else:
-            print 'can not find ', r
+            print ('can not find ', r)
     db.session.add(newArea)
     db.session.commit()
     return True

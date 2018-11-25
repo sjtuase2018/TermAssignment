@@ -8,3 +8,6 @@ app.db
 *.log
 *.log*
 *.mpg
+./__pycache__
+yolo.h5
+/Pic
