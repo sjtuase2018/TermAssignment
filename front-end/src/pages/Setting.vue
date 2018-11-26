@@ -2,11 +2,11 @@
   <div>
     <v-container>
       <v-toolbar flat color="grey">
-        <v-toolbar-title>SEETTING</v-toolbar-title>
+        <v-toolbar-title>设置</v-toolbar-title>
         <v-divider class="mx-2" inset vertical></v-divider>
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="560px">
-          <v-btn slot="activator" color="primary" dark class="mb-2" @click="setNew">New Item</v-btn>
+          <v-btn slot="activator" color="primary" dark class="mb-2" @click="setNew">添加</v-btn>
           <v-card>
             <v-card-title>
               <span class="headline">{{ formTitle }}</span>
@@ -16,12 +16,12 @@
               <v-container grid-list-md>
                 <v-layout wrap>
                   <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.area" label="Area （地区）"></v-text-field>
+                    <v-text-field v-model="editedItem.area" label="地区"></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm6 md6>
                     <!-- <v-text-field v-model="editedItem.rules" label="Rules （危险类别）">
                     </v-text-field> -->
-                    Rules （危险类别）
+                    危险类别
                     <v-layout row xs12 wrap>
                       <v-checkbox v-model="editedItem.rules" label="无人区" value="无人区"></v-checkbox>
                       <v-checkbox v-model="editedItem.rules" label="安全帽" value="安全帽"></v-checkbox>
@@ -34,13 +34,13 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-              <v-btn color="blue darken-1" flat @click.native="save(editedItem)">Save</v-btn>
+              <v-btn color="blue darken-1" flat @click.native="close">取消</v-btn>
+              <v-btn color="blue darken-1" flat @click.native="save(editedItem)">保存</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
       </v-toolbar>
-      <v-data-table :headers="headers" :loading="loading" :items="desserts" v-model="desserts" hide-actions class="elevation-1">
+      <v-data-table :headers="headers" :loading="loading" :items="desserts" no-data-text="没有数据" v-model="desserts" hide-actions class="elevation-1">
         <template slot="items" slot-scope="props">
           <td class="text-xs-center">{{ props.item.area }}</td>
           <td class="text-xs-center">
@@ -68,19 +68,19 @@
       new: false,
       loading: true,
       headers: [{
-          text: 'Area (地区）',
+          text: '地区',
           align: 'center',
           sortable: false,
           value: 'area'
         },
         {
-          text: 'Rules (危险类别）',
+          text: '危险类别',
           align: 'center',
           sortable: false,
           value: 'rules'
         },
         {
-          text: 'Actions',
+          text: '操作',
           value: 'name',
           align: 'center',
           sortable: false
@@ -96,13 +96,13 @@
       defaultItem: {
         id: '',
         area: 0,
-        rules: ['无人区', '安全帽', '工作服'],
+        rules: ['无人区'],
       }
     }),
 
     computed: {
       formTitle() {
-        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+        return this.editedIndex === -1 ? '新建' : '编辑'
       }
     },
 

@@ -18,7 +18,7 @@
     </v-content>
     <v-toolbar app fixed clipped-left>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Intelligent Humanoid Recognition System</v-toolbar-title>
+      <v-toolbar-title>智能人形识别系统</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-menu offset-y origin="center center" :nudge-bottom="10" transition="scale-transition">
         <v-btn icon large flat slot="activator">
@@ -52,7 +52,7 @@
       memus: [{
           icon: 'dashboard',
           href: 'realTime',
-          title: 'RealTime',
+          title: '实时展示',
           click: (e) => {
             console.log(e);
           }
@@ -60,7 +60,7 @@
         {
           icon: 'bar_chart',
           href: 'chart',
-          title: 'Chart',
+          title: '报表分析',
           click: (e) => {
             console.log(e);
           }
@@ -68,7 +68,7 @@
         {
           icon: 'data_usage',
           href: 'logs',
-          title: 'Logs',
+          title: '日志',
           click: (e) => {
             console.log(e);
           }
@@ -76,7 +76,7 @@
         {
           icon: 'settings',
           href: 'setting',
-          title: 'Settings',
+          title: '设置',
           click: (e) => {
             console.log(e);
           }
@@ -84,7 +84,7 @@
         {
           icon: 'account_circle',
           href: 'profile',
-          title: 'Profile',
+          title: '个人信息',
           click: (e) => {
             console.log(e);
           }
@@ -93,7 +93,7 @@
       items: [{
           icon: 'account_circle',
           href: 'profile',
-          title: 'Profile',
+          title: '个人信息',
           click: (e) => {
             console.log(e);
           }
@@ -101,7 +101,7 @@
         {
           icon: 'fullscreen_exit',
           href: 'login',
-          title: 'Logout',
+          title: '退出',
           click: (e) => {
             // window.getApp.$emit('APP_LOGOUT');
           }

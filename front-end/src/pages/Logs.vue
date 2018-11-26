@@ -2,13 +2,13 @@
   <div>
     <v-container>
       <v-toolbar flat color="grey">
-        <v-toolbar-title>LOGS</v-toolbar-title>
+        <v-toolbar-title>日志</v-toolbar-title>
         <v-divider class="mx-2" inset vertical></v-divider>
         <v-spacer></v-spacer>
         
-        <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details @keyup.enter="getLogs"></v-text-field>
+        <v-text-field v-model="search" append-icon="search" label="搜索" single-line hide-details @keyup.enter="getLogs"></v-text-field>
       </v-toolbar>
-      <v-data-table dark :headers="headers" :items="desserts" :pagination.sync="pagination" :total-items="totalDesserts"
+      <v-data-table dark :headers="headers" :items="desserts" :pagination.sync="pagination" :total-items="totalDesserts" no-data-text="没有数据"
         :rows-per-page-items="rowsPerPageItems" :loading="loading" prev-icon="skip_previous" next-icon="skip_next" sort-icon="mdi-menu-down" class="elevation-1">
         <template slot="items" slot-scope="props">
           <td class="text-xs-center">{{ props.item.area }}</td>
@@ -17,20 +17,21 @@
           <td class="text-xs-center">
             <v-dialog v-model="dialog" width="500">
               <v-btn slot="activator" color="primary" dark>
-                Click Me
+                查看
               </v-btn>
               <v-card>
                 <v-card-title class="headline grey" primary-title>
-                  PictureShot
+                  照片
                 </v-card-title>
                 <v-card-text>
-                  <v-img :src="props.item.pic_path" />
+                  <!-- <v-img :src="props.item.pic_path" /> -->
+                  <img src="/Pic/pic1.BMP" />
                 </v-card-text>
                 <v-divider></v-divider>
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn color="primary" flat @click="dialog = false">
-                    Close
+                    关闭
                   </v-btn>
                 </v-card-actions>
               </v-card>
@@ -38,7 +39,7 @@
           </td>
         </template>
         <v-alert slot="no-results" :value="true" color="error" icon="warning">
-          Your search for "{{ search }}" found no results.
+          对不起，找不到"{{ search }}"
         </v-alert>
       </v-data-table>
     </v-container>
@@ -59,25 +60,25 @@
       pagination: {},
       rowsPerPageItems: [5, 10, 25, 100],
       headers: [{
-          text: 'Area',
+          text: '地区',
           sortable: false,
           align: 'center',
           value: 'area'
         },
         {
-          text: 'Rule',
+          text: '规则',
           sortable: false,
           align: 'center',
           value: 'rule'
         },
         {
-          text: 'Date',
+          text: '日期',
           sortable: true,
           align: 'center',
           value: 'date'
         },
         {
-          text: 'PictureShot',
+          text: '图片',
           sortable: false,
           align: 'center',
           value: 'pic_path'
@@ -179,6 +180,9 @@
 
       },
 
+      close() {
+        this.dialog = false;
+      }
     }
   }
 </script>

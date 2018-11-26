@@ -6,7 +6,7 @@
           <v-flex xs16 sm8 md4 offset-xs2>
             <v-menu ref="menuS" :close-on-content-click="false" v-model="menuS" :nudge-right="40" :return-value.sync="date"
               lazy transition="scale-transition" offset-y full-width min-width="290px">
-              <v-text-field slot="activator" v-model="startTime" label="Start Date" prepend-icon="event" readonly></v-text-field>
+              <v-text-field slot="activator" v-model="startTime" label="开始日期" prepend-icon="event" readonly></v-text-field>
               <v-date-picker v-model="startTime" no-title scrollable></v-date-picker>
             </v-menu>
           </v-flex>
@@ -14,7 +14,7 @@
           <v-flex xs16 sm8 md4>
             <v-menu ref="menuE" :close-on-content-click="false" v-model="menuE" :nudge-right="40" :return-value.sync="date"
               lazy transition="scale-transition" offset-y full-width min-width="290px">
-              <v-text-field slot="activator" v-model="endTime" label="End Date" prepend-icon="event" readonly></v-text-field>
+              <v-text-field slot="activator" v-model="endTime" label="终止日期" prepend-icon="event" readonly></v-text-field>
               <v-date-picker v-model="endTime" no-title scrollable></v-date-picker>
             </v-menu>
           </v-flex>
@@ -35,7 +35,7 @@
           <div id="myChartArea" :style="{width: '400px', height: '400px'}"></div>
         </v-flex>
         <v-flex xs12>
-          <div id="myChartMoon" :style="{width: '860px', height: '600px'}"></div>
+          <div id="myChartMoon" :style="{width: '860px', height: '400px'}"></div>
         </v-flex>
       </v-layout>
     </v-container>
@@ -48,7 +48,6 @@
 
     data() {
       return {
-        msg: 'Welcome to Your Vue.js App',
         startTime: '2017-11-21',
         endTime: new Date().toISOString().substr(0, 10),
         menuS: false,
@@ -151,7 +150,7 @@
           },
           xAxis: {
             type: 'category',
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            data: ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日']
           },
           yAxis: {
             type: 'value'
@@ -185,7 +184,7 @@
             //selected: this.dataA.selected
           },
           series: [{
-            name: 'Area',
+            name: '地区',
             type: 'pie',
             radius: '55%',
             center: ['40%', '50%'],

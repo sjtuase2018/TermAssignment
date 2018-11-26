@@ -4,9 +4,9 @@
         <v-layout align-center justify-center>
           <div class="text-md-center">
             <h1>404</h1>
-            <h2 class="my-3 headline ">Sorry, page not found</h2>
+            <h2 class="my-3 headline ">对不起，页面没有找到</h2>
             <div>
-              <v-btn color="primary" @click="goHome">Go Home</v-btn>
+              <v-btn color="primary" @click="goHome">回到主页</v-btn>
             </div>  
           </div>
         </v-layout>
