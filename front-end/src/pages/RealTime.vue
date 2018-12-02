@@ -74,7 +74,7 @@
     mounted() {
       setTimeout(() => {
           console.log('dynamic change options', this.player)
-          this.player.muted(false)
+          // this.player.muted(false)
         }, 5000),
         this.$nextTick(() => {
           const swiperTop = this.$refs.swiperTop.swiper

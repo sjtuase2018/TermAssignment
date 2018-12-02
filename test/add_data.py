@@ -3,7 +3,7 @@ import sys
 sys.path.append('../')
 from app import *
 import random
-from datetime import datetime
+from datetime import date
 #db = SQLAlchemy(app)
 # me = Admin('')
 #print db.metadata.tables
@@ -18,7 +18,7 @@ from datetime import datetime
 # A1 = Area.query.filter_by(id=1).first()
 # A1.rules.append(R1)#向关系表中添加
 
-# #rule
+#rule
 # R1 = Rule('无人区')
 # R2 = Rule('安全帽')
 # R3 = Rule('工作服')
@@ -26,7 +26,7 @@ from datetime import datetime
 # db.session.add(R1)
 # db.session.add(R2)
 # db.session.add(R3)
-
+# db.session.commit()
 # #area
 # A1 = Area('东1')
 # A2 = Area('东2')
@@ -77,11 +77,11 @@ from datetime import datetime
 # db.session.add(V3)
 # db.session.add(V4)
 # db.session.add(V5)
-
-# # vlog
-# # 删除并把id起始为1
-# # DELETE FROM vlog;
-# # ALTER TABLE vlog AUTO_INCREMENT = 1;
+# db.session.commit()
+# vlog
+# 删除并把id起始为1
+# DELETE FROM vlog;
+# ALTER TABLE vlog AUTO_INCREMENT = 1;
 
 # a, b, c = 1, 1, 1
 # while (a <= 300) :
@@ -109,5 +109,25 @@ from datetime import datetime
 #         V1.rules.append(R3)
 #     a += 1
 
+# db.session.commit()
+
+a = 1
+while (a <= 100):
+    V = Vlog('11','东1','无人区')
+    db.session.add(V)
+    a += 1
+# while (a <= 200):
+#     V = Vlog('11','东2','安全帽')
+#     db.session.add(V)
+#     a += 1
+# while (a <= 300):
+#     V = Vlog('11','东3','工作服')
+#     db.session.add(V)
+#     a += 1
+    
+db.session.commit()
+
+# V = Vlog('11','东1','无人区')
+# db.session.add(V)
 # db.session.commit()
 

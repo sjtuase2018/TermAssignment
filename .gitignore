@@ -11,3 +11,4 @@ app.db
 ./__pycache__
 yolo.h5
 /Pic
+/sql

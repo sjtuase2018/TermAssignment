@@ -17,4 +17,4 @@ def gen(came):
 
 @api.route('/video_feed/')
 def video_feed():
-    return Response(gen(Camera('4')), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(gen(Camera('1')), mimetype='multipart/x-mixed-replace; boundary=frame')

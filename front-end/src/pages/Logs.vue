@@ -15,25 +15,14 @@
           <td class="text-xs-center">{{ props.item.rule }}</td>
           <td class="text-xs-center">{{ props.item.date|moment("YYYY-MM-DD HH:mm:ss") }}</td>
           <td class="text-xs-center">
-            <v-dialog v-model="dialog" width="500">
+            <v-dialog v-model="dialog" width="500px">
               <v-btn slot="activator" color="primary" dark>
                 查看
               </v-btn>
-              <v-card>
-                <v-card-title class="headline grey" primary-title>
-                  照片
-                </v-card-title>
+              <v-card> 
                 <v-card-text>
-                  <!-- <v-img :src="props.item.pic_path" /> -->
-                  <img src="/Pic/pic1.BMP" />
+                  <img :style="{width:'460px', height:'400px'}" :src="pic_path_test" />
                 </v-card-text>
-                <v-divider></v-divider>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="primary" flat @click="dialog = false">
-                    关闭
-                  </v-btn>
-                </v-card-actions>
               </v-card>
             </v-dialog>
           </td>
@@ -48,8 +37,11 @@
 
 <script>
   import axios from 'axios'
+  // import '../assets/images/pic0.jpg'
   export default {
     data: () => ({
+      // pic_path_test: require('../assets/images/pic0.jpg'),
+      pic_path_test: require('../../../Pic/pic0.jpg'),
       dialog: false,
       search: '',
       pagesize: 10,

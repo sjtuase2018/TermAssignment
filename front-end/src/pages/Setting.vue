@@ -90,12 +90,12 @@
       editedIndex: -1,
       editedItem: {
         id: '',
-        area: 0,
+        area: '',
         rules: ['无人区', '安全帽', '工作服'],
       },
       defaultItem: {
         id: '',
-        area: 0,
+        area: '',
         rules: ['无人区'],
       }
     }),
@@ -189,6 +189,11 @@
         // }
         //发送修改请求
         if (this.new) {
+          if (item.area == '') {
+            alert('请填入地区名称！')
+            return;
+          }
+
           const path = `http://localhost:5000/api/settingNew/`;
           axios.post(path, {
               id: item.id,

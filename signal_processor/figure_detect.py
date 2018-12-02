@@ -1,5 +1,8 @@
 from signal_processor import yolo_figure_detector
 from PIL import Image
+from datetime import datetime
+import os
+from app.db_io import addLog
 
 
 class FigureCapturer(object):
@@ -25,7 +28,13 @@ class FigureCapturer(object):
                 # print(classes_name)
                 # out_boxes.shape = [num of boxes, 4]
                 if 'person' in classes_name:
-                    r_image.show()
+                    savePath = 'G:\TermAssignment\Pic\\' + str(datetime.today().year) + '\\' + str(datetime.today().month) 
+                    if not os.path.exists(savePath):
+                        os.makedirs(savePath)
+                    if not os.path.isfile(savePath + '\pic' + str(timer) + '.jpg'):
+                        r_image.save(savePath + '\pic' + str(timer) + '.jpg')
+                        pic_path = 'Pic\\' + str(datetime.today().year) + '\\' + str(datetime.today().month) + '\pic' + str(timer) + '.jpg'
+                        addLog(pic_path, self._signal._camid, '无人区')
                     print('person detected')
 
             else:

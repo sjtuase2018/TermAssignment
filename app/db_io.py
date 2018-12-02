@@ -29,26 +29,21 @@ def LogQuery(sortby, size, startwith, search=None):
         logs = Vlog.query.order_by(sortby).offset(startwith).limit(size)
         total = Vlog.query.count()
     else:
-        logs = Vlog.query.filter(Vlog.date.contains(search))\
-            .order_by(sortby).offset(startwith).limit(size)
-        total = Vlog.query.filter(Vlog.date.contains(search))\
-            .order_by(sortby).count()
-        # query = Vlog.query.filter(Vlog.date.contains(search))
-        # # Vlog.query.filter(Vlog.rules.description.contains(search))
-        #     # Vlog.query.filter(Vlog.date.contains(search))
-        #     # .filter(Vlog.rules.contains(search)).order_by(sortby)
-        # print (query)
-        # logs = query.offset(startwith).limit(size)
-        # total = query.count()
-        # print (total)
+        search = '%' + str(search) + '%'
+        logs = Vlog.query.\
+            filter(Vlog.rule_name.like(search) | Vlog.area_name.like(search) | Vlog.date.ilike(search)).\
+            distinct().order_by(sortby).offset(startwith).limit(size)
+        total = Vlog.query.\
+            filter(Vlog.rule_name.like(search) | Vlog.area_name.like(search) | Vlog.date.ilike(search)).\
+            distinct().order_by(sortby).count()
     for log in logs:
         dict_tmp = {}
         dict_tmp['date'] = log.date
-        dict_tmp['area'] = log.area_id
-        dict_tmp['rule'] = ''
+        dict_tmp['area'] = log.area_name
+        dict_tmp['rule'] = log.rule_name
         dict_tmp['pic_path'] = log.pic_path
-        for rule in log.rules:
-            dict_tmp['rule'] += (rule.description + ' ')
+        # for rule in log.rules:
+        #     dict_tmp['rule'] += (rule.description + ' ')
         logs_list.append(dict_tmp)
     res = {}
     res['logs'] = logs_list
@@ -77,7 +72,7 @@ def GetLogNumByRule(startdate, enddate, id):
     logs = Vlog.query.filter(Vlog.date.between(startdate, enddate))
     for log in logs:
         w = log.date.month
-        res[w] += 1
+        res[w-1] += 1
     return res
 
 def GetAreas():
@@ -90,12 +85,13 @@ def GetAreas():
 
 
 
-def GetLogNumByArea(startdate, enddate, id):
+def GetLogNumByArea(startdate, enddate, areaid):
     # @pram startdate: '2017-10-1'
     # @pram enddate: '2018-10-1'
     # @pram id: area_id
     # return: num
-    res = Vlog.query.filter(Vlog.date.between(startdate, enddate)).filter_by(area_id =id).count()
+    areaname = Area.query.filter_by(id=areaid).first().description
+    res = Vlog.query.filter(Vlog.date.between(startdate, enddate)).filter_by(area_name=areaname).count()
     return res
 
 
@@ -155,5 +151,18 @@ def NewArea(name, rules):
 def DeleteArea(id):
     de = Area.query.filter_by(id=id).first()
     db.session.delete(de)
+    db.session.commit()
+    return True
+
+
+# 日志生成
+def addLog(pic_path, area_id, rule_name, date=None):
+    area = Area.query.filter_by(id=area_id).first()
+    area_name = area.description
+    if date is not None:
+        newLog = Vlog(pic_path, area_name, rule_name, date)
+    else:
+        newlog = Vlog(pic_path, area_name, rule_name)
+    db.session.add(newlog)
     db.session.commit()
     return True

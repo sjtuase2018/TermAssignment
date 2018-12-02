@@ -4,7 +4,7 @@
       <template>
         <v-layout row wrap>
           <v-flex xs16 sm8 md4 offset-xs2>
-            <v-menu ref="menuS" :close-on-content-click="false" v-model="menuS" :nudge-right="40" :return-value.sync="date"
+            <v-menu ref="menuS" :close-on-content-click="false" v-model="menuS" :nudge-right="40" 
               lazy transition="scale-transition" offset-y full-width min-width="290px">
               <v-text-field slot="activator" v-model="startTime" label="开始日期" prepend-icon="event" readonly></v-text-field>
               <v-date-picker v-model="startTime" no-title scrollable></v-date-picker>
@@ -12,7 +12,7 @@
           </v-flex>
           <v-spacer></v-spacer>
           <v-flex xs16 sm8 md4>
-            <v-menu ref="menuE" :close-on-content-click="false" v-model="menuE" :nudge-right="40" :return-value.sync="date"
+            <v-menu ref="menuE" :close-on-content-click="false" v-model="menuE" :nudge-right="40" 
               lazy transition="scale-transition" offset-y full-width min-width="290px">
               <v-text-field slot="activator" v-model="endTime" label="终止日期" prepend-icon="event" readonly></v-text-field>
               <v-date-picker v-model="endTime" no-title scrollable></v-date-picker>
@@ -98,9 +98,7 @@
 
       // this.drawLine();
     },
-    computed() {
 
-    },
     created() {
       // const path = `http://localhost:5000/api/getChart/`;
       // axios.get(path).then(response => {
