@@ -160,8 +160,8 @@
           const path = `http://localhost:5000/api/settingDelete/`;
           axios.post(path, {
               id
-            }).then(response => {
-              console.log(response.data),
+            }).then(() => {
+              // console.log(response.data),
                 // this.desserts = response.data
                 // this.$set(this.desserts)
                 // this.$router.push('/setting') 
@@ -199,8 +199,8 @@
               id: item.id,
               area: item.area,
               rules: item.rules
-            }).then(response => {
-              console.log(response.data);
+            }).then(() => {
+              // console.log(response.data);
               // this.desserts = response.data
               // this.$set(this.desserts)
               this.getCamera()
@@ -221,8 +221,8 @@
               id: item.id,
               area: item.area,
               rules: item.rules
-            }).then(response => {
-              console.log(response.data);
+            }).then(() => {
+              // console.log(response.data);
               // this.desserts = response.data
               // this.$set(this.desserts)
               this.getCamera()

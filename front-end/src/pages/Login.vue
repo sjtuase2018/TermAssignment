@@ -5,9 +5,9 @@
         <v-dialog v-model="dialog" width="500">
           <v-card>
             <v-card-text>
-              <v-alert :value="alertSuccessed" color="success" icon="check_circle" outline>
+              <!-- <v-alert :value="alertSuccessed" color="success" icon="check_circle" outline>
                 登录成功！
-              </v-alert>
+              </v-alert> -->
               <v-alert :value="alertFailure" color="error" icon="warning" outline>
                 {{alertText}}
               </v-alert>

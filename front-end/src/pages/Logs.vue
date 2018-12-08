@@ -5,7 +5,14 @@
         <v-toolbar-title>日志</v-toolbar-title>
         <v-divider class="mx-2" inset vertical></v-divider>
         <v-spacer></v-spacer>
-        
+          <v-dialog v-model="dia" width="500" dark>
+              <!-- <v-btn slot="activator" color="primary" dark> -->
+              <v-card> 
+                <v-card-text>
+                  <img class='img' :src="pic_path_temp" />
+                </v-card-text>
+              </v-card>
+            </v-dialog>
         <v-text-field v-model="search" append-icon="search" label="搜索" single-line hide-details @keyup.enter="getLogs"></v-text-field>
       </v-toolbar>
       <v-data-table dark :headers="headers" :items="desserts" :pagination.sync="pagination" :total-items="totalDesserts" no-data-text="没有数据"
@@ -15,16 +22,8 @@
           <td class="text-xs-center">{{ props.item.rule }}</td>
           <td class="text-xs-center">{{ props.item.date|moment("YYYY-MM-DD HH:mm:ss") }}</td>
           <td class="text-xs-center">
-            <v-dialog v-model="dialog" width="500px">
-              <v-btn slot="activator" color="primary" dark>
-                查看
-              </v-btn>
-              <v-card> 
-                <v-card-text>
-                  <img :style="{width:'460px', height:'400px'}" :src="pic_path_test" />
-                </v-card-text>
-              </v-card>
-            </v-dialog>
+            <img id='img' :style="{width:'50px', height:'50px'}" :src="props.item.pic_path" @click="showImage(props.item.pic_path)" />
+            
           </td>
         </template>
         <v-alert slot="no-results" :value="true" color="error" icon="warning">
@@ -37,12 +36,12 @@
 
 <script>
   import axios from 'axios'
+  
   // import '../assets/images/pic0.jpg'
   export default {
     data: () => ({
-      // pic_path_test: require('../assets/images/pic0.jpg'),
-      pic_path_test: require('../../../Pic/pic0.jpg'),
-      dialog: false,
+      pic_path_temp: '',
+      dia: false,
       search: '',
       pagesize: 10,
       sortby: 'date',
@@ -127,8 +126,9 @@
     },
 
     methods: {
-      showPicture() {
-        this.dialog = true
+      showImage(pic_path) {
+        this.dia = true;
+        this.pic_path_temp = pic_path;
       },
       getLogs() {
         if (this.search) {
@@ -180,4 +180,8 @@
 </script>
 
 <style scoped>
+.img {
+  width: 460px;
+  height: 400px;
+}
 </style>

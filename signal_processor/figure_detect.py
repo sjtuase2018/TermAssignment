@@ -27,13 +27,14 @@ class FigureCapturer(object):
                 r_image, out_boxes, _, classes_name = yolo_figure_detector.detect_image(Image.fromarray(frame))
                 # print(classes_name)
                 # out_boxes.shape = [num of boxes, 4]
+                #两帧很接近
                 if 'person' in classes_name:
-                    savePath = 'G:\TermAssignment\Pic\\' + str(datetime.today().year) + '\\' + str(datetime.today().month) 
+                    savePath = 'G:\TermAssignment\Pic\\' + str(datetime.today().year) + '\\' + str(datetime.today().month) + '\\' + str(datetime.today().day)
                     if not os.path.exists(savePath):
                         os.makedirs(savePath)
                     if not os.path.isfile(savePath + '\pic' + str(timer) + '.jpg'):
                         r_image.save(savePath + '\pic' + str(timer) + '.jpg')
-                        pic_path = 'Pic\\' + str(datetime.today().year) + '\\' + str(datetime.today().month) + '\pic' + str(timer) + '.jpg'
+                        pic_path = 'http://localhost:83/' + str(datetime.today().year) + '/' + str(datetime.today().month) + '/' + str(datetime.today().day) + '/pic' + str(timer) + '.jpg'
                         addLog(pic_path, self._signal._camid, '无人区')
                     print('person detected')
 
@@ -43,6 +44,7 @@ class FigureCapturer(object):
             timer += 1
         print('no signal or deactivated by other caller')
         self.deactive()
+        
 
     def deactive(self):
         self._isActive = False
