@@ -69,7 +69,8 @@ def GetLogNumByRule(startdate, enddate, id):
     # @pram id: rule_id
     # return: num
     res= [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    logs = Vlog.query.filter(Vlog.date.between(startdate, enddate))
+    ruleName = Rule.query.filter_by(id = id).first().description
+    logs = Vlog.query.filter(Vlog.date.between(startdate, enddate)).filter_by(rule_name = ruleName).all()
     for log in logs:
         w = log.date.month
         res[w-1] += 1

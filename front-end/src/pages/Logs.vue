@@ -20,7 +20,7 @@
         <template slot="items" slot-scope="props">
           <td class="text-xs-center">{{ props.item.area }}</td>
           <td class="text-xs-center">{{ props.item.rule }}</td>
-          <td class="text-xs-center">{{ props.item.date|moment("YYYY-MM-DD HH:mm:ss") }}</td>
+          <td class="text-xs-center">{{ props.item.date }}</td>
           <td class="text-xs-center">
             <img id='img' :style="{width:'50px', height:'50px'}" :src="props.item.pic_path" @click="showImage(props.item.pic_path)" />
             
@@ -131,6 +131,7 @@
         this.pic_path_temp = pic_path;
       },
       getLogs() {
+        let moment = require("moment");
         if (this.search) {
           const path = `http://localhost:5000/api/getLogs/`;
           axios.post(path, {
@@ -142,6 +143,9 @@
               //console.log(response.data),
               this.desserts = response.data.logs
               this.totalDesserts = response.data.length
+              this.desserts.forEach(element => {
+                element.date = moment(element.date).utcOffset(0).format('YYYY-MM-DD HH:mm:ss')
+              });
             })
             .catch(error => {
               console.log(error)
@@ -157,6 +161,9 @@
               //console.log(response.data),
               this.desserts = response.data.logs
               this.totalDesserts = response.data.length
+              this.desserts.forEach(element => {
+                element.date = moment(element.date).utcOffset(0).format('YYYY-MM-DD HH:mm:ss')
+              });
             })
             .catch(error => {
               console.log(error)
