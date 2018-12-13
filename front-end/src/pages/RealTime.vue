@@ -28,7 +28,8 @@
           </v-flex>
         </v-layout>
       </div>
-      <!-- <v-btn @click="getImg()"/> -->
+      
+      <v-btn @click="modelSwitch()"/>
       <!-- <img style="-webkit-user-select: none;" src="http://localhost:5000/api/video_feed/?camid=1" width="1037" height="583"> -->
     </div>
   </v-container>
@@ -51,7 +52,7 @@
       return {
         imgUrl: '',
         id: 1,
-
+        model: '',
         swiperOptionTop: {
           spaceBetween: 10,
           loop: true,
@@ -87,7 +88,16 @@
       // this.getImg();
     },
     methods: {
+      modelSwitch() {
 
+        console.log('getimg ')
+        const path = `http://localhost:5000/api/modelSwitch/`;
+        axios.get(path, {
+          model: this.model
+        }).then(response => {
+          console.log(response)
+        })
+      },
       getImg() {
         const config = {
           headers: {

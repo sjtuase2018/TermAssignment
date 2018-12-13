@@ -2,9 +2,29 @@
 from flask import request, Blueprint, jsonify
 from app.db_io import Register, ExitUser, VarifyUser, LogQuery, GetWeekDayLogNum, GetLogNumByRule, GetAreas, GetLogNumByArea, GetRuleByArea,\
     AreaUpdate, NewArea, DeleteArea
-
+# from app import _pool
 
 api = Blueprint('api', __name__)
+
+
+def wanted_function(x):
+    # import packages that is used in this function
+    # do your expensive time consuming process
+    print ("I ran?")
+    return x * x
+
+
+# # realTime
+# @api.route('/modelSwitch/', methods=('POST','GET'))
+# def modelSwitch():
+#     x=2
+#     print ("+1")
+#     # f = _pool.apply_async(wanted_function, (x,))
+#     # r = f.get(timeout=2)
+#     # print (r)
+#     print ("1")
+#     # return 'Result is %d' % r
+#     return jsonify({'code': 200})
 
 
 # register
@@ -123,3 +143,4 @@ def settingDelete():
         return jsonify({'code': 200})
     else:
         return 400
+

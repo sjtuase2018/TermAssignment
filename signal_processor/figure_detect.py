@@ -48,3 +48,8 @@ class FigureCapturer(object):
 
     def deactive(self):
         self._isActive = False
+
+
+
+
+
