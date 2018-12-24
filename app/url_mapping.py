@@ -14,17 +14,17 @@ def wanted_function(x):
     return x * x
 
 
-# # realTime
-# @api.route('/modelSwitch/', methods=('POST','GET'))
-# def modelSwitch():
-#     x=2
-#     print ("+1")
-#     # f = _pool.apply_async(wanted_function, (x,))
-#     # r = f.get(timeout=2)
-#     # print (r)
-#     print ("1")
-#     # return 'Result is %d' % r
-#     return jsonify({'code': 200})
+# realTime
+@api.route('/modelSwitch/', methods=('POST','GET'))
+def modelSwitch():
+    x=2
+    print ("+1")
+    # f = _pool.apply_async(wanted_function, (x,))
+    # r = f.get(timeout=2)
+    # print (r)
+    print ("1")
+    # return 'Result is %d' % r
+    return jsonify({'code': 200})
 
 
 # register

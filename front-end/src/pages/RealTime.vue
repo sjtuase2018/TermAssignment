@@ -89,6 +89,15 @@
     },
     methods: {
       modelSwitch() {
+        let windowObj = window.open()
+        windowObj.location = 'http://localhost:8080/#/profile' //弹出一个你要打开的页面
+        //在你弹出的那个页面关那个页面使用：
+        // window.close()
+        //在当前页面关闭刚才弹出的页面使用：
+        windowObj.close()
+        // window.opener = null;
+        // window.open("http://localhost:8080/#/profile");
+        // window.close();
 
         console.log('getimg ')
         const path = `http://localhost:5000/api/modelSwitch/`;
