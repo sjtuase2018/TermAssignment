@@ -58,7 +58,7 @@ from app.url_mapping import *
 from app.video_stream import *
 app.register_blueprint(api, url_prefix="/api")
 
-
+from signal_processor.figure_detect import FigureCapturer
 from signal_processor.helmet_detect import HelmetCapturer
 from app.db_io import GetAreas
 
