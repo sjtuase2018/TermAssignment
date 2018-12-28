@@ -58,19 +58,12 @@ from app.url_mapping import *
 from app.video_stream import *
 app.register_blueprint(api, url_prefix="/api")
 
-# from signal_processor.figure_detect import *
-# from app.db_io import GetAreas
 
+from signal_processor.helmet_detect import HelmetCapturer
+from app.db_io import GetAreas
 
-# cams = [Camera(x) for x in GetAreas().keys()]
-# print('all cams signal loaded')
-# # bind figure_scanner to cam[0] by default
-# figure_scanner = FigureCapturer(cams[0])
-# figure_scanner.active(1)
-# pool = Pool(processes = 4)
-# # pool.apply_async(figure_scanner.active, args=(1,))
-# pool.apply_async(poolTry)
-# print ("pool")
-# pool.close()
-# #调用join之前，先调用close函数，否则会出错。执行完close后不会有新的进程加入到pool,join函数等待所有子进程结束
-# pool.join()
+cams = [Camera(x) for x in GetAreas().keys()]
+print('all cams signal loaded')
+figure_scanner = FigureCapturer(cams[0])
+helmet_scanner = HelmetCapturer(cams[0])
+
