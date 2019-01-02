@@ -1,7 +1,9 @@
 from signal_processor import yolo_helmet_detector, yolo_figure_detector
 from PIL import Image
 import cv2
-
+from datetime import datetime
+import os
+from app.db_io import addLog
 
 class HelmetCapturer(object):
     _signal = None
@@ -35,8 +37,15 @@ class HelmetCapturer(object):
                     # this class returns image as numpy array
                     if len(classes_name) < person_count:
                         r_image = Image.fromarray(cv2.cvtColor(r_image, cv2.COLOR_BGR2RGB))
-                        r_image.show()
+                        # r_image.show()
                         # f_image.show()
+                        savePath = 'G:\TermAssignment\Pic\\' + str(datetime.today().year) + '\\' + str(datetime.today().month) + '\\' + str(datetime.today().day)
+                        if not os.path.exists(savePath):
+                            os.makedirs(savePath)
+                        if not os.path.isfile(savePath + '\pic' + str(timer) + '.jpg'):
+                            r_image.save(savePath + '\pic' + str(timer) + '.jpg')
+                            pic_path = 'http://localhost:83/' + str(datetime.today().year) + '/' + str(datetime.today().month) + '/' + str(datetime.today().day) + '/pic' + str(timer) + '.jpg'
+                            addLog(pic_path, self._signal._camid, '安全帽', datetime.today())
             else:
                 print('skip this frame')
             frame = self._signal.get_frame()

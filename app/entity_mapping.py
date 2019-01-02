@@ -66,12 +66,12 @@ class Rule(db.Model):
 
 class Vlog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.DateTime, default=datetime.now())
+    date = db.Column(db.DateTime, default=datetime.today())
     pic_path = db.Column(db.String(255))
     area_name = db.Column(db.String(255))
     rule_name = db.Column(db.String(255))
 
-    def __init__(self, pic_path, area_name, rule_name, date = datetime.now()):
+    def __init__(self, pic_path, area_name, rule_name, date = datetime.today()):
         self.pic_path = pic_path
         self.area_name = area_name
         self.rule_name = rule_name 

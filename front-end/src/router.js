@@ -61,6 +61,18 @@ export default new Router({
       )
     },
     {
+      path: '/detector',
+      meta: {
+        public: true,
+      },
+      name: 'Detector',
+      component: () => import(
+        /* webpackChunkName: "routes" */
+        /* webpackMode: "lazy-once" */
+        `@/pages/Detector.vue`
+      )
+    },
+    {
       path: '/manage',
       component: () => import(
         /* webpackChunkName: "routes" */

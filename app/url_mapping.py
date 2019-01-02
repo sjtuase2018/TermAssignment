@@ -1,30 +1,58 @@
 # -*- coding: UTF-8 -*-
 from flask import request, Blueprint, jsonify
 from app.db_io import Register, ExitUser, VarifyUser, LogQuery, GetWeekDayLogNum, GetLogNumByRule, GetAreas, GetLogNumByArea, GetRuleByArea,\
-    AreaUpdate, NewArea, DeleteArea
+    AreaUpdate, NewArea, DeleteArea, GetRule
 # from app import _pool
 
 api = Blueprint('api', __name__)
 
 
-def wanted_function(x):
-    # import packages that is used in this function
-    # do your expensive time consuming process
-    print ("I ran?")
-    return x * x
+cameraOn = [False for i in range(len(GetAreas()))]
 
 
 # realTime
-@api.route('/modelSwitch/', methods=('POST','GET'))
-def modelSwitch():
-    x=2
-    print ("+1")
-    # f = _pool.apply_async(wanted_function, (x,))
-    # r = f.get(timeout=2)
-    # print (r)
-    print ("1")
-    # return 'Result is %d' % r
+@api.route('/active/', methods=('POST','GET'))
+def active():
+    print('active')
+    cameraId = request.json['cameraId']
+    from app import figure_scanner, helmet_scanner, cams
+    from camera.camera_sim import Camera
+    # rules = GetRule()
+    # for rule in rules:
+    #     if '无人区' in rule:
+    #         figure_scanner.switch_signal(cams[cameraId])
+    #         figure_scanner.active()
+    #     else if '安全帽' in rule:
+    #         helmet_scanner
+    rules = GetRule(cameraId)
+    print(rules)
+    if '无人区' in rules:
+        print('+无人区')
+        figure_scanner.switch_signal(Camera(int(cameraId)))
+        figure_scanner.active()
+    elif '安全帽' in rules:
+        print('+安全帽')
+        helmet_scanner.switch_signal(Camera(int(cameraId)))
+        helmet_scanner.active()
     return jsonify({'code': 200})
+
+
+
+@api.route('/deactive/', methods=('POST','GET'))
+def deactive():
+    print('deactive')
+    cameraId = request.json['cameraId']
+    global cameraOn
+    if (cameraId == 0):
+        return jsonify({'code': 200, 'cameraOn': cameraOn})
+    index = request.json['index']
+    from app import figure_scanner, helmet_scanner
+    figure_scanner.deactive()
+    helmet_scanner.deactive()
+    # from app import cameraOn
+    cameraOn = [False for i in range(len(GetAreas()))]
+    cameraOn[index] = True
+    return jsonify({'code': 200, 'cameraOn': cameraOn})
 
 
 # register

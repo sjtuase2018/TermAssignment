@@ -111,11 +111,11 @@ from datetime import date
 
 # db.session.commit()
 
-a = 1
-while (a <= 100):
-    V = Vlog('11','东1','无人区')
-    db.session.add(V)
-    a += 1
+# a = 1
+# while (a <= 100):
+#     V = Vlog('11','东1','无人区')
+#     db.session.add(V)
+#     a += 1
 # while (a <= 200):
 #     V = Vlog('11','东2','安全帽')
 #     db.session.add(V)
@@ -125,7 +125,7 @@ while (a <= 100):
 #     db.session.add(V)
 #     a += 1
     
-db.session.commit()
+# db.session.commit()
 
 # V = Vlog('11','东1','无人区')
 # db.session.add(V)

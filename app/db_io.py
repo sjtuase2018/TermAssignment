@@ -103,6 +103,13 @@ def GetRuleByArea(areaid):
         res[rule.id] = rule.description
     return res
 
+#获得地区规则
+def GetRule(areaid):
+    area = Area.query.filter_by(id=areaid).first()
+    res = []
+    for rule in area.rules:
+        res.append(rule.description)
+    return res
 
 def AreaUpdate(areaid, **kw):
     # return update state
@@ -163,7 +170,7 @@ def addLog(pic_path, area_id, rule_name, date=None):
     if date is not None:
         newLog = Vlog(pic_path, area_name, rule_name, date)
     else:
-        newlog = Vlog(pic_path, area_name, rule_name)
-    db.session.add(newlog)
+        newLog = Vlog(pic_path, area_name, rule_name)
+    db.session.add(newLog)
     db.session.commit()
     return True

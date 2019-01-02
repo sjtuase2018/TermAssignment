@@ -48,8 +48,8 @@
 
     data() {
       return {
-        startTime: '2017-11-21',
-        endTime: new Date().toISOString().substr(0, 10),
+        startTime: '2018-1-1',
+        endTime: '2019-1-1',
         menuS: false,
         menuE: false,
         dataWeek: [],
@@ -100,6 +100,7 @@
     },
 
     created() {
+      this.endTime.date +=1;
       // const path = `http://localhost:5000/api/getChart/`;
       // axios.get(path).then(response => {
       //     console.log(response.data)
@@ -207,7 +208,7 @@
             trigger: 'axis'
           },
           legend: {
-            data: ['无人区', '安全帽', '工作服']
+            data: ['无人区', '安全帽']
           },
           toolbox: {
             show: true,
@@ -280,28 +281,28 @@
                 }]
               }
             },
-            {
-              name: '工作服',
-              type: 'bar',
-              data: this.dataMoon.dataM3,
-              markPoint: {
-                data: [{
-                    type: 'max',
-                    name: '最大值'
-                  },
-                  {
-                    type: 'min',
-                    name: '最小值'
-                  }
-                ]
-              },
-              markLine: {
-                data: [{
-                  type: 'average',
-                  name: '平均值'
-                }]
-              }
-            }
+            // {
+            //   name: '工作服',
+            //   type: 'bar',
+            //   data: this.dataMoon.dataM3,
+            //   markPoint: {
+            //     data: [{
+            //         type: 'max',
+            //         name: '最大值'
+            //       },
+            //       {
+            //         type: 'min',
+            //         name: '最小值'
+            //       }
+            //     ]
+            //   },
+            //   markLine: {
+            //     data: [{
+            //       type: 'average',
+            //       name: '平均值'
+            //     }]
+            //   }
+            // }
           ]
         })
       }

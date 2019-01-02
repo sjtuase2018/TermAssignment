@@ -1,7 +1,7 @@
 # from app import app
 from app.url_mapping import api
 from camera.camera_sim import Camera
-from flask import Response
+from flask import Response, request
 
 
 def gen(came):
@@ -17,4 +17,5 @@ def gen(came):
 
 @api.route('/video_feed/')
 def video_feed():
-    return Response(gen(Camera('1')), mimetype='multipart/x-mixed-replace; boundary=frame')
+    cameraId = request.args.get('cameraId')
+    return Response(gen(Camera(cameraId)), mimetype='multipart/x-mixed-replace; boundary=frame')

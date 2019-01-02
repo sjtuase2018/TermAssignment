@@ -1,5 +1,6 @@
 <template>
   <div id="root" dark>
+    
       <router-view/>
   </div>
 </template>
@@ -8,6 +9,9 @@
 
 export default {
   name: "App",
+  created () {
+            document.title = "智能人形识别系统";
+        },
   data: () => ({
       drawer: true,
       items: [

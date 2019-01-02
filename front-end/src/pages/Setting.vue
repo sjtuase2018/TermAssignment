@@ -5,7 +5,7 @@
         <v-toolbar-title>设置</v-toolbar-title>
         <v-divider class="mx-2" inset vertical></v-divider>
         <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" max-width="560px">
+        <v-dialog v-model="dialog" max-width="500px">
           <v-btn slot="activator" color="primary" dark class="mb-2" @click="setNew">添加</v-btn>
           <v-card>
             <v-card-title>
@@ -23,9 +23,14 @@
                     </v-text-field> -->
                     危险类别
                     <v-layout row xs12 wrap>
-                      <v-checkbox v-model="editedItem.rules" label="无人区" value="无人区"></v-checkbox>
+                      <v-radio-group v-model="editedItem.rules[0]" :mandatory="false">
+                        <v-radio label="无人区" value="无人区"></v-radio>
+                        <v-radio label="安全帽" value="安全帽"></v-radio>
+                      </v-radio-group>
+                      <!-- <v-checkbox v-model="editedItem.rules" label="无人区" value="无人区"></v-checkbox>
                       <v-checkbox v-model="editedItem.rules" label="安全帽" value="安全帽"></v-checkbox>
-                      <v-checkbox v-model="editedItem.rules" label="工作服" value="工作服"></v-checkbox>
+                      <v-checkbox v-model="editedItem.rules" label="工作服" value="工作服"></v-checkbox> -->
+                      <!-- <v-checkbox v-model="editedItem.rules" label="工作服" value="工作服"></v-checkbox> -->
                     </v-layout>
                   </v-flex>
                 </v-layout>
@@ -40,7 +45,8 @@
           </v-card>
         </v-dialog>
       </v-toolbar>
-      <v-data-table :headers="headers" :loading="loading" :items="desserts" no-data-text="没有数据" v-model="desserts" hide-actions class="elevation-1">
+      <v-data-table :headers="headers" :loading="loading" :items="desserts" no-data-text="没有数据" v-model="desserts"
+        hide-actions class="elevation-1">
         <template slot="items" slot-scope="props">
           <td class="text-xs-center">{{ props.item.area }}</td>
           <td class="text-xs-center">
@@ -91,12 +97,13 @@
       editedItem: {
         id: '',
         area: '',
-        rules: ['无人区', '安全帽', '工作服'],
+        // rules: ['无人区', '安全帽', '工作服'],
+        rules: ['无人区']
       },
       defaultItem: {
         id: '',
         area: '',
-        rules: ['无人区'],
+        rules: ['无人区']
       }
     }),
 
@@ -154,7 +161,7 @@
       deleteItem(item) {
         const index = this.desserts.indexOf(item)
         var id = item.id
-        var r = confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
+        var r = confirm('你确定要删除这个地区吗?（不可撤回）') && this.desserts.splice(index, 1)
         if (r) {
           //发送删除请求
           const path = `http://localhost:5000/api/settingDelete/`;
@@ -162,10 +169,10 @@
               id
             }).then(() => {
               // console.log(response.data),
-                // this.desserts = response.data
-                // this.$set(this.desserts)
-                // this.$router.push('/setting') 
-                this.getCamera()
+              // this.desserts = response.data
+              // this.$set(this.desserts)
+              // this.$router.push('/setting') 
+              this.getCamera()
             })
             .catch(error => {
               console.log(error)

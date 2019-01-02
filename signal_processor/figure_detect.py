@@ -35,7 +35,7 @@ class FigureCapturer(object):
                     if not os.path.isfile(savePath + '\pic' + str(timer) + '.jpg'):
                         r_image.save(savePath + '\pic' + str(timer) + '.jpg')
                         pic_path = 'http://localhost:83/' + str(datetime.today().year) + '/' + str(datetime.today().month) + '/' + str(datetime.today().day) + '/pic' + str(timer) + '.jpg'
-                        addLog(pic_path, self._signal._camid, '无人区')
+                        addLog(pic_path, self._signal._camid, '无人区', datetime.today())
                     print('person detected')
 
             else:

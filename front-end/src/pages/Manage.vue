@@ -80,29 +80,14 @@
           click: (e) => {
             console.log(e);
           }
-        },
-        {
-          icon: 'account_circle',
-          href: 'profile',
-          title: '个人信息',
-          click: (e) => {
-            console.log(e);
-          }
         }
       ],
-      items: [{
-          icon: 'account_circle',
-          href: 'profile',
-          title: '个人信息',
-          click: (e) => {
-            console.log(e);
-          }
-        },
+      items: [
         {
           icon: 'fullscreen_exit',
           href: 'login',
           title: '退出',
-          click: (e) => {
+          click: () => {
             // window.getApp.$emit('APP_LOGOUT');
           }
         }
