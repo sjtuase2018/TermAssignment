@@ -26,7 +26,7 @@ class YOLO(object):
         "model_path": basedir + '/model_data/yolo.h5',
         "anchors_path": basedir + '/model_data/yolo_anchors.txt',
         "classes_path": basedir + '/model_data/coco_classes.txt',
-        "score" : 0.3,
+        "score" : 0.5,
         "iou" : 0.45,
         "model_image_size" : (416, 416),
         "gpu_num" : 1,

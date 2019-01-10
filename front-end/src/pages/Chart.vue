@@ -100,7 +100,7 @@
     },
 
     created() {
-      this.endTime.date +=1;
+      // this.endTime.date +=1;
       // const path = `http://localhost:5000/api/getChart/`;
       // axios.get(path).then(response => {
       //     console.log(response.data)

@@ -29,12 +29,13 @@ class FigureCapturer(object):
                 # out_boxes.shape = [num of boxes, 4]
                 #两帧很接近
                 if 'person' in classes_name:
+                    pic_name = 'pic' + ('%02d%02d%02d' % (datetime.today().hour, datetime.today().minute, datetime.today().second)) + '.jpg'
                     savePath = 'G:\TermAssignment\Pic\\' + str(datetime.today().year) + '\\' + str(datetime.today().month) + '\\' + str(datetime.today().day)
                     if not os.path.exists(savePath):
                         os.makedirs(savePath)
-                    if not os.path.isfile(savePath + '\pic' + str(timer) + '.jpg'):
-                        r_image.save(savePath + '\pic' + str(timer) + '.jpg')
-                        pic_path = 'http://localhost:83/' + str(datetime.today().year) + '/' + str(datetime.today().month) + '/' + str(datetime.today().day) + '/pic' + str(timer) + '.jpg'
+                    if not os.path.isfile(savePath + '\\' + pic_name):
+                        r_image.save(savePath + '\\' + pic_name)
+                        pic_path = 'http://localhost:83/' + str(datetime.today().year) + '/' + str(datetime.today().month) + '/' + str(datetime.today().day) + '/' + pic_name
                         addLog(pic_path, self._signal._camid, '无人区', datetime.today())
                     print('person detected')
 

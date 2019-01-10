@@ -2,6 +2,7 @@
 from app.entity_mapping import *
 from sqlalchemy import and_,or_,not_
 
+
 def Register(username, password):
     user = Admin(username)
     user.set_password(password)
@@ -164,13 +165,10 @@ def DeleteArea(id):
 
 
 # 日志生成
-def addLog(pic_path, area_id, rule_name, date=None):
+def addLog(pic_path, area_id, rule_name, date):
     area = Area.query.filter_by(id=area_id).first()
     area_name = area.description
-    if date is not None:
-        newLog = Vlog(pic_path, area_name, rule_name, date)
-    else:
-        newLog = Vlog(pic_path, area_name, rule_name)
+    newLog = Vlog(pic_path, area_name, rule_name, date)
     db.session.add(newLog)
     db.session.commit()
     return True

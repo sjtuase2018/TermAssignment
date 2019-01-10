@@ -39,12 +39,13 @@ class HelmetCapturer(object):
                         r_image = Image.fromarray(cv2.cvtColor(r_image, cv2.COLOR_BGR2RGB))
                         # r_image.show()
                         # f_image.show()
+                        pic_name = 'pic' + ('%02d%02d%02d' % (datetime.today().hour, datetime.today().minute, datetime.today().second)) + '.jpg'
                         savePath = 'G:\TermAssignment\Pic\\' + str(datetime.today().year) + '\\' + str(datetime.today().month) + '\\' + str(datetime.today().day)
                         if not os.path.exists(savePath):
                             os.makedirs(savePath)
-                        if not os.path.isfile(savePath + '\pic' + str(timer) + '.jpg'):
-                            r_image.save(savePath + '\pic' + str(timer) + '.jpg')
-                            pic_path = 'http://localhost:83/' + str(datetime.today().year) + '/' + str(datetime.today().month) + '/' + str(datetime.today().day) + '/pic' + str(timer) + '.jpg'
+                        if not os.path.isfile(savePath + '\\' + pic_name):
+                            r_image.save(savePath + '\\' + pic_name)
+                            pic_path = 'http://localhost:83/' + str(datetime.today().year) + '/' + str(datetime.today().month) + '/' + str(datetime.today().day) + '/' + pic_name
                             addLog(pic_path, self._signal._camid, '安全帽', datetime.today())
             else:
                 print('skip this frame')

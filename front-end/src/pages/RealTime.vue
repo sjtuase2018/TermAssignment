@@ -179,7 +179,7 @@
           index: index
         }).then(response => {
           this.$store.commit('changeCamera', cameraId);
-          const url = "http://localhost:8080/#/detector?cameraId=" + cameraId;
+          const url = "http://localhost:5000/#/detector?cameraId=" + cameraId;
           let windowObj = window.open(url,"_blank","toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=100, height=100, top=450");
           console.log(response)
           console.log(windowObj);
