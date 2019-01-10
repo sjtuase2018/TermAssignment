@@ -50,8 +50,10 @@ def deactive():
     figure_scanner.deactive()
     helmet_scanner.deactive()
     # from app import cameraOn
-    cameraOn = [False for i in range(len(GetAreas()))]
-    cameraOn[index] = True
+    # cameraOn = [False for i in range(len(GetAreas()))]
+    for i in range(len(GetAreas())):
+        cameraOn[i] = False if i != index else cameraOn[i]
+    cameraOn[index] = not cameraOn[index]
     return jsonify({'code': 200, 'cameraOn': cameraOn})
 
 

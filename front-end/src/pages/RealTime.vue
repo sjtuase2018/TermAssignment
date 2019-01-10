@@ -5,58 +5,24 @@
         <v-layout row wrap>
           <v-flex>
             <!-- <div  v-if="cameras.length>0"> -->
-            <swiper v-if="cameras.length>0" :options="swiperOptionTop" class="gallery-top" ref="swiperTop">
+            <swiper v-if="desserts.length>0" :options="swiperOptionTop" class="gallery-top" ref="swiperTop">
               
-              <swiper-slide v-for="(camera, index) in cameras" :key="index" class="slide-1">
-                <img class="videoImg" :src="imgUrl+camera">
+              <swiper-slide v-for="(dessert, index) in desserts" :key="index" class="slide-1">
+                <img class="videoImg" :src="imgUrl+dessert.id">
               </swiper-slide>
-              <!-- <swiper-slide class="slide-1">
-                <img class="videoImg" src="http://localhost:5000/api/video_feed/?cameraId=1">
-              </swiper-slide>
-              <swiper-slide class="slide-2">
 
-              </swiper-slide>
-              <swiper-slide class="slide-3"></swiper-slide>
-              <swiper-slide class="slide-4"></swiper-slide>
-              <swiper-slide class="slide-5"></swiper-slide> -->
               <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
               <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
             </swiper>
             
             <!-- swiper2 Thumbs -->
-            
-            <swiper v-if="cameras.length>0" :options="swiperOptionThumbs" class="gallery-thumbs" ref="swiperThumbs">
+            <swiper v-if="desserts.length>0" :options="swiperOptionThumbs" class="gallery-thumbs" ref="swiperThumbs">
               <!-- <swiper-slide v-for="camera in cameras" class="slide-1"> -->
-              <swiper-slide v-for="(camera, index) in cameras" :key="index" :style="{ backgroundImage: 'url(' + backgroundImg[index] + ')' }">
-                <v-btn fab small class="switch" v-bind:color="green[index]" @click="modelSwitch(camera, index)">
-                  {{index+1}}
+              <swiper-slide v-for="(dessert, index) in desserts" :key="index" :style="{ backgroundImage: 'url(' + backgroundImg[index] + ')' }">
+                <v-btn fab small class="switch" v-bind:color="green[index]" @click="modelSwitch(dessert.id, index)">
+                  {{dessert.area}}
                 </v-btn> 
               </swiper-slide>
-              <!-- <swiper-slide class="slide-1">
-                <v-btn fab small class="switch" v-bind:color="green[0]" @click="modelSwitch(1)">1
-
-                </v-btn>
-              </swiper-slide>
-              <swiper-slide class="slide-2">
-                <v-btn fab small class="switch" v-bind:color="green[1]" @click="modelSwitch(2)">2
-                  
-                </v-btn>
-              </swiper-slide>
-              <swiper-slide class="slide-3">
-                <v-btn fab small class="switch" v-bind:color="green[2]" @click="modelSwitch(3)">3
-                 
-                </v-btn>
-              </swiper-slide>
-              <swiper-slide class="slide-4">
-                <v-btn fab small class="switch" v-bind:color="green[3]" @click="modelSwitch(4)">4
-                  
-                </v-btn>
-              </swiper-slide>
-              <swiper-slide class="slide-5">
-                <v-btn fab small class="switch" v-bind:color="green[4]" @click="modelSwitch(5)">5
-                  
-                </v-btn>
-              </swiper-slide> -->
             </swiper>
             <!-- </div> -->
           </v-flex>
@@ -179,15 +145,17 @@
           index: index
         }).then(response => {
           this.$store.commit('changeCamera', cameraId);
-          const url = "http://localhost:5000/#/detector?cameraId=" + cameraId;
-          let windowObj = window.open(url,"_blank","toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=100, height=100, top=450");
-          console.log(response)
-          console.log(windowObj);
-          // windowObj.close();
-          console.log(windowObj.closed);
-          if (windowObj.closed) {
-            this.$set(this.green, cameraId , "");
+          if (!this.cameraOn[index]) {
+            const url = "http://localhost:5000/#/detector?cameraId=" + cameraId;
+            let windowObj = window.open(url,"_blank","toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=100, height=100, top=450");
+            if (windowObj.closed) {
+              this.$set(this.green, cameraId , "");
+            }
           }
+          // console.log(response)
+          // console.log(windowObj);
+          // // windowObj.close();
+          // console.log(windowObj.closed);
           this.cameraOn = response.data.cameraOn;
           for (var i = 0; i < this.cameraOn.length; i++) {
             if(this.cameraOn[i]) {
